@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -10,116 +11,18 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Badge } from "@/components/ui/badge";
 import { Plus, Trash2, Clock } from "lucide-react";
-
-interface Skill {
-  id: string;
-  name: string;
-  description: string;
-  castTime: number; // in seconds
-  cooldown: number;
-  manaCost: number;
-  type: "damage" | "heal" | "buff" | "debuff";
-  color: string;
-}
-
-interface SequenceSkill extends Skill {
-  startTime: number;
-}
-
-const availableSkills: Skill[] = [
-  {
-    id: "fireball",
-    name: "Fireball",
-    description: "Launches a blazing projectile",
-    castTime: 2.5,
-    cooldown: 8,
-    manaCost: 40,
-    type: "damage",
-    color: "bg-red-500",
-  },
-  {
-    id: "heal",
-    name: "Greater Heal",
-    description: "Restores significant health",
-    castTime: 3.0,
-    cooldown: 12,
-    manaCost: 60,
-    type: "heal",
-    color: "bg-green-500",
-  },
-  {
-    id: "shield",
-    name: "Arcane Shield",
-    description: "Creates protective barrier",
-    castTime: 1.5,
-    cooldown: 15,
-    manaCost: 35,
-    type: "buff",
-    color: "bg-blue-500",
-  },
-  {
-    id: "lightning",
-    name: "Lightning Bolt",
-    description: "Instant electrical damage",
-    castTime: 1.0,
-    cooldown: 5,
-    manaCost: 25,
-    type: "damage",
-    color: "bg-yellow-500",
-  },
-  {
-    id: "curse",
-    name: "Weakness Curse",
-    description: "Reduces enemy strength",
-    castTime: 2.0,
-    cooldown: 20,
-    manaCost: 30,
-    type: "debuff",
-    color: "bg-purple-500",
-  },
-  {
-    id: "teleport",
-    name: "Blink",
-    description: "Instant movement ability",
-    castTime: 0.5,
-    cooldown: 10,
-    manaCost: 20,
-    type: "buff",
-    color: "bg-cyan-500",
-  },
-  {
-    id: "meteor",
-    name: "Meteor Strike",
-    description: "Devastating area attack",
-    castTime: 4.0,
-    cooldown: 30,
-    manaCost: 80,
-    type: "damage",
-    color: "bg-orange-500",
-  },
-  {
-    id: "regeneration",
-    name: "Regeneration",
-    description: "Healing over time effect",
-    castTime: 1.8,
-    cooldown: 25,
-    manaCost: 45,
-    type: "heal",
-    color: "bg-emerald-500",
-  },
-];
+import { availableSkills } from "@/constants/constants";
 
 export default function RotationBar() {
   const [skillSequence, setSkillSequence] = useState<SequenceSkill[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  const actualSequenceTime = skillSequence.reduce(
+  const currentSequenceTime = skillSequence.reduce(
     (total, skill) => Math.max(total, skill.startTime + skill.castTime),
     0
   );
-  const totalSequenceTime = Math.ceil(actualSequenceTime / 5) * 5; // Round up to nearest 5-second interval
+  const totalSequenceTime = Math.ceil(currentSequenceTime / 5) * 5; // Round up to nearest 5-second interval
 
   const addSkill = (skill: Skill) => {
     const startTime =
@@ -159,21 +62,6 @@ export default function RotationBar() {
   const getSkillPosition = (startTime: number) => {
     if (totalSequenceTime === 0) return 0;
     return (startTime / totalSequenceTime) * 100;
-  };
-
-  const getTypeIcon = (type: string) => {
-    switch (type) {
-      case "damage":
-        return "⚔️";
-      case "heal":
-        return "💚";
-      case "buff":
-        return "🛡️";
-      case "debuff":
-        return "💀";
-      default:
-        return "✨";
-    }
   };
 
   return (
@@ -218,9 +106,6 @@ export default function RotationBar() {
                         />
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2 mb-1">
-                            <span className="text-sm">
-                              {getTypeIcon(skill.type)}
-                            </span>
                             <h3 className="font-semibold text-sm">
                               {skill.name}
                             </h3>
@@ -283,9 +168,6 @@ export default function RotationBar() {
                     >
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-1 mb-0.5">
-                          <span className="text-xs">
-                            {getTypeIcon(skill.type)}
-                          </span>
                           <span className="font-semibold truncate">
                             {skill.name}
                           </span>
