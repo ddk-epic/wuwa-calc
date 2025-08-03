@@ -1,14 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { availableSkills } from "@/constants/constants";
 import TimelineBar from "./timeline/timeline-bar";
 import SelectSkill from "./timeline/skill-selection";
 import TimeMarkers from "./timeline/time-markers";
-import { Dialog, DialogTrigger } from "@radix-ui/react-dialog";
-import { Plus } from "lucide-react";
 
 export default function CalculatorContent() {
   const [skillSequence, setSkillSequence] = useState<SequenceSkill[]>([]);
