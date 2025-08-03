@@ -1,7 +1,7 @@
 "use client";
 
-import RotationBar from "@/components/rotation-bar";
+import CalculatorContent from "@/components/calc-content";
 
 export default function Page() {
-  return <RotationBar />;
+  return <CalculatorContent />;
 }
