@@ -26,7 +26,7 @@ export default function TimelineBar(props: TimelineBarProps) {
     <div className="relative">
       {skillSequence.length === 0 ? (
         <div className="h-16 border-2 border-dashed border-muted-foreground/20 rounded-lg flex items-center justify-center text-muted-foreground bg-muted/10">
-          No skills in sequence. Click "Add Skill" to get started.
+          No skills in sequence. Click &quot;Add Skill&quot; to get started.
         </div>
       ) : (
         <div className="relative h-16 bg-muted/20 border border-muted/30 rounded-lg overflow-hidden">

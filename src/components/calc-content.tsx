@@ -53,7 +53,7 @@ export default function CalculatorContent() {
         <div>
           <h1 className="text-2xl font-bold">Skill Sequence Builder</h1>
           <p className="text-muted-foreground">
-            Plan your character's ability rotation
+            Plan your character&apos;s ability rotation
           </p>
         </div>
         <div className="flex gap-2">
