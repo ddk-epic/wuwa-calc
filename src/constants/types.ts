@@ -7,6 +7,7 @@ interface SkillState {
 interface Skill {
   id: string;
   name: string;
+  source: string;
   type: "Basic" | "Heavy" | "Skill" | "Liberation" | "Coord";
   hits: number;
   hitframes: number[];
@@ -16,7 +17,8 @@ interface Skill {
   resonance: number;
   concerto: number;
   state: SkillState;
-  color: string;
+  bgColor: string;
+  textColor: string;
 }
 
 interface SequenceSkill extends Skill {
