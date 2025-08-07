@@ -30,11 +30,19 @@ interface CharacterSelectProps {
 
 export default function CharacterSelect(props: CharacterSelectProps) {
   const { updateCharacters } = props;
-  const characterPlaceholder = ["Character 1", "Character 2", "Character 3"];
+  const characterPlaceholder = ["DPS", "Slot 2", "Slot 3"];
 
   return (
     <div className="grid grid-cols-3">
-      {characterPlaceholder.map((placeholder, index) => (
+      <Select onValueChange={(value) => updateCharacters(0, value)}>
+        <SelectTrigger className="w-[170px] bg-gray-200 text-black border-gray-700 border-1 rounded-none focus:ring-0 focus:outline-none focus:ring-transparent">
+          <SelectValue placeholder={"DPS"} />
+        </SelectTrigger>
+        <SelectContent>
+          <CharacterSelectGroup />
+        </SelectContent>
+      </Select>
+      {characterPlaceholder.splice(1).map((placeholder, index) => (
         <Select
           key={index}
           onValueChange={(value) => updateCharacters(index, value)}
