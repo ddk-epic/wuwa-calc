@@ -37,12 +37,21 @@ export default function CalculatorContent() {
 
   const removeSkill = (index: number) => {
     const newSequence = skillSequence.filter((_, i) => i !== index);
-    // Recalculate start times
-    const recalculatedSequence = newSequence.map((skill, i) => ({
-      ...skill,
-      startTime:
-        i > 0 ? newSequence[i - 1].startTime + newSequence[i - 1].castTime : 0,
-    }));
+    const recalculatedSequence: SequenceSkill[] = [];
+
+    for (let i = 0; i < newSequence.length; i++) {
+      let startTime = 0;
+      if (i > 0) {
+        const prev = recalculatedSequence[i - 1];
+        startTime = prev.startTime + prev.castTime;
+      }
+
+      recalculatedSequence.push({
+        ...newSequence[i],
+        startTime,
+      });
+    }
+
     setSkillSequence(recalculatedSequence);
   };
 
