@@ -12,15 +12,28 @@ import TimeMarkers from "./timeline/time-markers";
 import CharacterSelect from "./char-selection";
 
 export default function CalculatorContent() {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [characters, setCharacters] = useState(["", "", ""]);
   const [skillSequence, setSkillSequence] = useState<SequenceSkill[]>([]);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [skillStartTime, setSkillStartTime] = useState<number[]>([]);
+
+  const calculateTime = (sequence: SequenceSkill[]) => {
+    const timeSteps: number[] = [];
+    let currentTime = 0;
+
+    sequence.forEach((skill) => {
+      timeSteps.push(currentTime);
+      currentTime += skill.castTime;
+    });
+
+    setSkillStartTime(timeSteps);
+  };
 
   const currentSequenceTime = skillSequence.reduce(
     (total, skill) => Math.max(total, skill.startTime + skill.castTime),
     0
   );
-  const totalSequenceTime = Math.ceil(currentSequenceTime / 10) * 10; // Round up to nearest 5-second interval
+  const maxSequenceTime = Math.ceil(currentSequenceTime / 10) * 10; // Round up to nearest 10-second interval
 
   const addSkill = (skill: Skill) => {
     const startTime =
@@ -32,8 +45,10 @@ export default function CalculatorContent() {
       ...skill,
       startTime,
     };
+    const newSequence = [...skillSequence, newSkill];
 
-    setSkillSequence([...skillSequence, newSkill]);
+    setSkillSequence(newSequence);
+    calculateTime(newSequence);
     setIsDialogOpen(false);
   };
 
@@ -55,6 +70,7 @@ export default function CalculatorContent() {
     }
 
     setSkillSequence(recalculatedSequence);
+    calculateTime(recalculatedSequence);
   };
 
   const handleCharacterChange = (index: number, value: string) => {
@@ -129,25 +145,27 @@ export default function CalculatorContent() {
             </div>
 
             {/* Timeline Bar */}
-            {skillSequence.length === 0 ? (
-              <div className="h-40 border-2 border-dashed border-muted-foreground/20 rounded-lg flex items-center justify-center text-muted-foreground bg-muted/10">
-                No skills in sequence. Click &quot;Add Skill&quot; to get
-                started.
-              </div>
-            ) : (
-              characters.map((character, index) => (
-                <TimelineBar
-                  key={index}
-                  character={character}
-                  skillSequence={skillSequence}
-                  totalSequenceTime={totalSequenceTime}
-                  removeSkill={removeSkill}
-                />
-              ))
-            )}
+            <div className="pt-2 pb-1">
+              {skillSequence.length === 0 ? (
+                <div className="h-40 border-2 border-dashed border-muted-foreground/20 rounded-lg flex items-center justify-center text-muted-foreground bg-muted/10">
+                  No skills in sequence. Click &quot;Add Skill&quot; to get
+                  started.
+                </div>
+              ) : (
+                characters.map((character, index) => (
+                  <TimelineBar
+                    key={index}
+                    character={character}
+                    skillSequence={skillSequence}
+                    maxSequenceTime={maxSequenceTime}
+                    removeSkill={removeSkill}
+                  />
+                ))
+              )}
+            </div>
 
             {/* Time Markers */}
-            <TimeMarkers totalSequenceTime={totalSequenceTime} />
+            <TimeMarkers maxSequenceTime={maxSequenceTime} />
           </div>
         </CardContent>
       </Card>
@@ -168,7 +186,9 @@ export default function CalculatorContent() {
                 >
                   <div className="grid grid-cols-[4fr_1fr] w-full items-center p-2">
                     <div className="font-semibold">{skill.name}</div>
-                    <div className="text-right">{skill.castTime}s</div>
+                    <div className="text-right">
+                      {skillStartTime[index].toFixed(2)}s
+                    </div>
                   </div>
                 </div>
               ))}

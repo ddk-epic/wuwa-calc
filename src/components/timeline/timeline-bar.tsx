@@ -6,21 +6,26 @@ import { X } from "lucide-react";
 interface TimelineBarProps {
   character: string;
   skillSequence: SequenceSkill[];
-  totalSequenceTime: number;
+  maxSequenceTime: number;
   removeSkill: (index: number) => void;
 }
 
 export default function TimelineBar(props: TimelineBarProps) {
-  const { character, skillSequence, totalSequenceTime, removeSkill } = props;
+  const {
+    character,
+    skillSequence,
+    maxSequenceTime,
+    removeSkill,
+  } = props;
 
   const getSkillWidth = (castTime: number) => {
-    if (totalSequenceTime === 0) return 0;
-    return Math.max((castTime / totalSequenceTime) * 100, 2); // Minimum 2% width
+    if (maxSequenceTime === 0) return 0;
+    return Math.max((castTime / maxSequenceTime) * 100, 2); // Minimum 2% width
   };
 
   const getSkillPosition = (startTime: number) => {
-    if (totalSequenceTime === 0) return 0;
-    return (startTime / totalSequenceTime) * 100;
+    if (maxSequenceTime === 0) return 0;
+    return (startTime / maxSequenceTime) * 100;
   };
 
   return (

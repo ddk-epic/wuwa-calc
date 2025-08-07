@@ -1,22 +1,22 @@
 import React from "react";
 
 interface TimeMarkersProps {
-  totalSequenceTime: number;
+  maxSequenceTime: number;
 }
 
-export default function TimeMarkers({ totalSequenceTime }: TimeMarkersProps) {
+export default function TimeMarkers({ maxSequenceTime }: TimeMarkersProps) {
   return (
     <>
-      {totalSequenceTime > 0 && (
+      {maxSequenceTime > 0 && (
         <div className="relative h-4">
           {Array.from(
-            { length: Math.floor(totalSequenceTime / 5) + 1 },
+            { length: Math.floor(maxSequenceTime / 5) + 1 },
             (_, i) => (
               <div
                 key={i}
                 className="absolute top-0 text-xs text-muted-foreground"
                 style={{
-                  left: `${((i * 5) / totalSequenceTime) * 100}%`,
+                  left: `${((i * 5) / maxSequenceTime) * 100}%`,
                 }}
               >
                 <div className="w-px h-2 bg-muted-foreground/30 mb-1" />
