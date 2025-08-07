@@ -33,7 +33,7 @@ export default function TimelineBar(props: TimelineBarProps) {
           {skillSequence.map((skill, index) => (
             <div
               key={`${skill.id}-${index}`}
-              className={`absolute top-0 h-full ${skill.color} rounded-sm flex items-center justify-between pl-2 text-white text-xs font-medium group cursor-pointer transition-all hover:brightness-110`}
+              className={`absolute top-0 h-full ${skill.color} rounded-md flex items-center justify-between pl-2 text-white text-xs font-medium border-gray-100 border-2 group cursor-pointer transition-all hover:brightness-110`}
               style={{
                 left: `${getSkillPosition(skill.startTime)}%`,
                 width: `${getSkillWidth(skill.castTime)}%`,

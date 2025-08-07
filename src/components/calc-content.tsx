@@ -9,8 +9,10 @@ import { availableSkills } from "@/constants/constants";
 import TimelineBar from "./timeline/timeline-bar";
 import SelectSkill from "./timeline/skill-selection";
 import TimeMarkers from "./timeline/time-markers";
+import CharacterSelect from "./char-selection";
 
 export default function CalculatorContent() {
+  const [characters, setCharacters] = useState(["", "", ""]);
   const [skillSequence, setSkillSequence] = useState<SequenceSkill[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -55,6 +57,12 @@ export default function CalculatorContent() {
     setSkillSequence(recalculatedSequence);
   };
 
+  const handleCharacterChange = (index: number, value: string) => {
+    const updatedArr = [...characters];
+    updatedArr[index] = value;
+    setCharacters(updatedArr);
+  };
+
   return (
     <div className="w-full max-w-6xl mx-auto p-6 space-y-6">
       {/* Page Header */}
@@ -64,6 +72,12 @@ export default function CalculatorContent() {
           <p className="text-muted-foreground">
             Plan your character&apos;s ability rotation
           </p>
+        </div>
+        <div>
+          <CharacterSelect
+            characters={characters}
+            updateCharacters={handleCharacterChange}
+          />
         </div>
         <div className="flex gap-2">
           <Button
@@ -89,7 +103,15 @@ export default function CalculatorContent() {
 
       <Card>
         <CardContent className="px-6">
-          <h3 className="font-semibold mb-3">Rotation Sequence</h3>
+          <div className="flex justify-between">
+            <h3 className="font-semibold mb-3">Rotation Sequence</h3>
+            {characters[0] && (
+              <h3 className="font-semibold mb-3">
+                {characters[0].charAt(0).toUpperCase() + characters[0].slice(1)}
+                &apos;s Team
+              </h3>
+            )}
+          </div>
           <div className="space-y-4">
             {/* Timeline Header */}
             <div className="flex items-center justify-between text-sm text-muted-foreground">

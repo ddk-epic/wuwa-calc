@@ -1,5 +1,12 @@
 import { frameToSecond } from "@/lib/utils";
 
+export const characters: string[] = [
+  "Encore",
+  "Camellya",
+  "Sanhua",
+  "Shorekeeper",
+];
+
 export const availableSkills: Skill[] = [
   {
     id: "crimson_blossom",
