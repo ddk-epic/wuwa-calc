@@ -77,8 +77,10 @@ export default function CalculatorContent() {
       </div>
 
       {/* Timeline Container */}
+
       <Card>
-        <CardContent className="p-6">
+        <CardContent className="px-6">
+          <h3 className="font-semibold mb-3">Rotation Sequence</h3>
           <div className="space-y-4">
             {/* Timeline Header */}
             <div className="flex items-center justify-between text-sm text-muted-foreground">
@@ -101,38 +103,69 @@ export default function CalculatorContent() {
         </CardContent>
       </Card>
 
-      {/* Sequence Summary */}
-      {skillSequence.length > 0 && (
-        <Card>
-          <CardContent className="p-4">
-            <h3 className="font-semibold mb-3">Sequence Summary</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-              <div>
-                <span className="text-muted-foreground">Total Skills:</span>
-                <span className="ml-2 font-medium">{skillSequence.length}</span>
+      <div className="grid grid-cols-[1fr_2fr] gap-6">
+        {/* Skill Sequence */}
+        {skillSequence.length > 0 && (
+          <Card>
+            <CardContent className="px-4 space-y-1">
+              <div className="grid grid-cols-[4fr_1fr] w-full items-center px-2">
+                <h3 className="font-semibold mb-3">Rotation</h3>
+                <h3 className="text-right font-semibold mb-3">Time</h3>
               </div>
-              <div>
-                <span className="text-muted-foreground">Total Forte Cost:</span>
-                <span className="ml-2 font-medium">
-                  {skillSequence.reduce(
-                    (total, skill) => total + skill.forte,
-                    0
-                  )}
-                </span>
+              {skillSequence.map((skill, index) => (
+                <div
+                  key={`${skill.id}-${index}`}
+                  className={`${skill.color} rounded-sm flex items-center justify-between text-white text-xs font-medium group cursor-pointer transition-all hover:brightness-110`}
+                >
+                  <div className="grid grid-cols-[4fr_1fr] w-full items-center p-2">
+                    <div className="font-semibold">{skill.name}</div>
+                    <div className="text-right">{skill.castTime}s</div>
+                  </div>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Sequence Summary */}
+        {skillSequence.length > 0 && (
+          <Card>
+            <CardContent className="px-4">
+              <h3 className="font-semibold mb-3">Sequence Summary</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                <div>
+                  <span className="text-muted-foreground">Total Skills:</span>
+                  <span className="ml-2 font-medium">
+                    {skillSequence.length}
+                  </span>
+                </div>
+                <div>
+                  <span className="text-muted-foreground">
+                    Total Forte Cost:
+                  </span>
+                  <span className="ml-2 font-medium">
+                    {skillSequence.reduce(
+                      (total, skill) => total + skill.forte,
+                      0
+                    )}
+                  </span>
+                </div>
+                <div>
+                  <span className="text-muted-foreground">
+                    Total Cast Time:
+                  </span>
+                  <span className="ml-2 font-medium">
+                    {skillSequence
+                      .reduce((total, skill) => total + skill.castTime, 0)
+                      .toFixed(2)}
+                    s
+                  </span>
+                </div>
               </div>
-              <div>
-                <span className="text-muted-foreground">Total Cast Time:</span>
-                <span className="ml-2 font-medium">
-                  {skillSequence
-                    .reduce((total, skill) => total + skill.castTime, 0)
-                    .toFixed(2)}
-                  s
-                </span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      )}
+            </CardContent>
+          </Card>
+        )}
+      </div>
     </div>
   );
 }
