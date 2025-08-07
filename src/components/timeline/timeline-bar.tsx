@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Trash2 } from "lucide-react";
+import { X } from "lucide-react";
 
 interface TimelineBarProps {
   skillSequence: SequenceSkill[];
@@ -14,7 +14,7 @@ export default function TimelineBar(props: TimelineBarProps) {
 
   const getSkillWidth = (castTime: number) => {
     if (totalSequenceTime === 0) return 0;
-    return Math.max((castTime / totalSequenceTime) * 100, 8); // Minimum 8% width
+    return Math.max((castTime / totalSequenceTime) * 100, 2); // Minimum 2% width
   };
 
   const getSkillPosition = (startTime: number) => {
@@ -33,7 +33,7 @@ export default function TimelineBar(props: TimelineBarProps) {
           {skillSequence.map((skill, index) => (
             <div
               key={`${skill.id}-${index}`}
-              className={`absolute top-0 h-full ${skill.color} rounded-sm flex items-center justify-between px-2 text-white text-xs font-medium group cursor-pointer transition-all hover:brightness-110`}
+              className={`absolute top-0 h-full ${skill.color} rounded-sm flex items-center justify-between pl-2 text-white text-xs font-medium group cursor-pointer transition-all hover:brightness-110`}
               style={{
                 left: `${getSkillPosition(skill.startTime)}%`,
                 width: `${getSkillWidth(skill.castTime)}%`,
@@ -45,16 +45,16 @@ export default function TimelineBar(props: TimelineBarProps) {
                   <span className="font-semibold truncate">{skill.name}</span>
                 </div>
                 <div className="text-xs opacity-90 truncate">
-                  {skill.castTime}s cast
+                  {skill.castTime}s
                 </div>
               </div>
               <Button
                 variant="ghost"
                 size="sm"
-                className="opacity-0 group-hover:opacity-100 transition-opacity h-6 w-6 p-0 hover:bg-white/20"
+                className="opacity-0 group-hover:opacity-100 transition-opacity size-6 p-0 hover:bg-white/20"
                 onClick={() => removeSkill(index)}
               >
-                <Trash2 className="w-3 h-3" />
+                <X className="w-2 h-2" />
               </Button>
             </div>
           ))}

@@ -1,11 +1,21 @@
+interface SkillState {
+  isInAir: boolean;
+  isGroundedForSwap: boolean;
+
+}
+
 interface Skill {
   id: string;
   name: string;
-  description: string;
-  castTime: number; // in seconds
+  type: "Basic" | "Heavy" | "Skill" | "Liberation" | "Coord";
+  hits: number;
+  hitframes: number[];
+  castTime: number; // in frames, 60/s
   cooldown: number;
-  manaCost: number;
-  type: "damage" | "heal" | "buff" | "debuff";
+  forte: number; // In percent
+  resonance: number;
+  concerto: number;
+  state: SkillState;
   color: string;
 }
 

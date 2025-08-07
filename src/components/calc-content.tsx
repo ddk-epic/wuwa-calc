@@ -18,7 +18,7 @@ export default function CalculatorContent() {
     (total, skill) => Math.max(total, skill.startTime + skill.castTime),
     0
   );
-  const totalSequenceTime = Math.ceil(currentSequenceTime / 5) * 5; // Round up to nearest 5-second interval
+  const totalSequenceTime = Math.ceil(currentSequenceTime / 10) * 10; // Round up to nearest 5-second interval
 
   const addSkill = (skill: Skill) => {
     const startTime =
@@ -112,24 +112,20 @@ export default function CalculatorContent() {
                 <span className="ml-2 font-medium">{skillSequence.length}</span>
               </div>
               <div>
-                <span className="text-muted-foreground">Total Mana Cost:</span>
+                <span className="text-muted-foreground">Total Forte Cost:</span>
                 <span className="ml-2 font-medium">
                   {skillSequence.reduce(
-                    (total, skill) => total + skill.manaCost,
+                    (total, skill) => total + skill.forte,
                     0
-                  )}{" "}
-                  MP
+                  )}
                 </span>
               </div>
               <div>
-                <span className="text-muted-foreground">Avg Cast Time:</span>
+                <span className="text-muted-foreground">Total Cast Time:</span>
                 <span className="ml-2 font-medium">
-                  {(
-                    skillSequence.reduce(
-                      (total, skill) => total + skill.castTime,
-                      0
-                    ) / skillSequence.length
-                  ).toFixed(1)}
+                  {skillSequence
+                    .reduce((total, skill) => total + skill.castTime, 0)
+                    .toFixed(2)}
                   s
                 </span>
               </div>
