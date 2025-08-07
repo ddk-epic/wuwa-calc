@@ -61,6 +61,7 @@ export default function CalculatorContent() {
     const updatedArr = [...characters];
     updatedArr[index] = value;
     setCharacters(updatedArr);
+    console.log("characters", updatedArr);
   };
 
   return (
@@ -112,21 +113,38 @@ export default function CalculatorContent() {
               </h3>
             )}
           </div>
-          <div className="space-y-4">
+          <div>
             {/* Timeline Header */}
             <div className="flex items-center justify-between text-sm text-muted-foreground">
               <span>Skill Sequence Timeline</span>
-              {totalSequenceTime > 0 && (
-                <span>Total Duration: {totalSequenceTime.toFixed(1)}s</span>
+              {skillSequence.length > 0 && (
+                <span>
+                  Total Duration:{" "}
+                  {skillSequence
+                    .reduce((total, skill) => total + skill.castTime, 0)
+                    .toFixed(2)}
+                  s
+                </span>
               )}
             </div>
 
             {/* Timeline Bar */}
-            <TimelineBar
-              skillSequence={skillSequence}
-              totalSequenceTime={totalSequenceTime}
-              removeSkill={removeSkill}
-            />
+            {skillSequence.length === 0 ? (
+              <div className="h-40 border-2 border-dashed border-muted-foreground/20 rounded-lg flex items-center justify-center text-muted-foreground bg-muted/10">
+                No skills in sequence. Click &quot;Add Skill&quot; to get
+                started.
+              </div>
+            ) : (
+              characters.map((character, index) => (
+                <TimelineBar
+                  key={index}
+                  character={character}
+                  skillSequence={skillSequence}
+                  totalSequenceTime={totalSequenceTime}
+                  removeSkill={removeSkill}
+                />
+              ))
+            )}
 
             {/* Time Markers */}
             <TimeMarkers totalSequenceTime={totalSequenceTime} />
@@ -146,7 +164,7 @@ export default function CalculatorContent() {
               {skillSequence.map((skill, index) => (
                 <div
                   key={`${skill.id}-${index}`}
-                  className={`${skill.color} rounded-sm flex items-center justify-between text-white text-xs font-medium group cursor-pointer transition-all hover:brightness-110`}
+                  className={`${skill.bgColor} ${skill.textColor} rounded-sm flex items-center justify-between text-xs font-medium group cursor-pointer transition-all hover:brightness-110`}
                 >
                   <div className="grid grid-cols-[4fr_1fr] w-full items-center p-2">
                     <div className="font-semibold">{skill.name}</div>

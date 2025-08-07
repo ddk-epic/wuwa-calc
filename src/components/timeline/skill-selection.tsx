@@ -30,7 +30,7 @@ export default function SelectSkill(props: SelectSkillProps) {
             <CardContent className="px-1">
               <div className="flex items-start gap-3">
                 <div
-                  className={`w-3 h-3 rounded-full ${skill.color} mt-1 flex-shrink-0`}
+                  className={`w-3 h-3 rounded-full ${skill.bgColor} mt-1 flex-shrink-0`}
                 />
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
