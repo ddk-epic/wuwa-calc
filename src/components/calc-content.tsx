@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -46,6 +46,8 @@ export default function CalculatorContent() {
     0
   );
   const maxSequenceTime = Math.ceil(currentSequenceTime / 10) * 10; // Round up to nearest 10-second interval
+  const timelineWidth = Math.min(maxSequenceTime, 30);
+  const isScrollable = maxSequenceTime > 30;
 
   const addSkill = (skill: Skill) => {
     const startTime =
@@ -137,7 +139,11 @@ export default function CalculatorContent() {
               </h3>
             )}
           </div>
-          <div>
+          <div
+            className={`pb-3 ${
+              isScrollable ? "overflow-x-auto" : "overflow-hidden"
+            }`}
+          >
             {/* Timeline Header */}
             <div className="flex items-center justify-between text-sm text-muted-foreground">
               <span>Skill Sequence Timeline</span>
@@ -165,6 +171,7 @@ export default function CalculatorContent() {
                     key={index}
                     character={character}
                     skillSequence={skillSequence}
+                    timelineWidth={timelineWidth}
                     maxSequenceTime={maxSequenceTime}
                     removeSkill={removeSkill}
                   />
@@ -173,7 +180,7 @@ export default function CalculatorContent() {
             </div>
 
             {/* Time Markers */}
-            <TimeMarkers maxSequenceTime={maxSequenceTime} />
+            <TimeMarkers timelineWidth={timelineWidth} maxSequenceTime={maxSequenceTime} />
           </div>
         </CardContent>
       </Card>

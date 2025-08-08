@@ -6,6 +6,7 @@ import { X } from "lucide-react";
 interface TimelineBarProps {
   character: string;
   skillSequence: SequenceSkill[];
+  timelineWidth: number;
   maxSequenceTime: number;
   removeSkill: (index: number) => void;
 }
@@ -14,24 +15,25 @@ export default function TimelineBar(props: TimelineBarProps) {
   const {
     character,
     skillSequence,
+    timelineWidth,
     maxSequenceTime,
     removeSkill,
   } = props;
 
   const getSkillWidth = (castTime: number) => {
     if (maxSequenceTime === 0) return 0;
-    return Math.max((castTime / maxSequenceTime) * 100, 2); // Minimum 2% width
+    return (castTime / timelineWidth) * 100;
   };
 
   const getSkillPosition = (startTime: number) => {
     if (maxSequenceTime === 0) return 0;
-    return (startTime / maxSequenceTime) * 100;
+    return (startTime / timelineWidth) * 100;
   };
 
   return (
     <div className="relative">
       {skillSequence.length > 0 && (
-        <div className="relative h-12 bg-muted/20 border border-muted/30 rounded-lg overflow-hidden">
+        <div className="relative h-12 bg-muted/20 border border-muted/30 rounded-lg">
           {skillSequence.map((skill, index) => {
             if (character === skill.source.toLowerCase())
               return (
@@ -41,7 +43,7 @@ export default function TimelineBar(props: TimelineBarProps) {
                   style={{
                     left: `${getSkillPosition(skill.startTime)}%`,
                     width: `${getSkillWidth(skill.castTime)}%`,
-                    minWidth: "53px",
+                    minWidth: "20px",
                   }}
                 >
                   <div className="flex-1 min-w-0">
