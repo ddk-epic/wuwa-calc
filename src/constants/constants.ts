@@ -7,7 +7,7 @@ export const characters: string[] = [
   "Shorekeeper",
 ];
 
-export const availableSkills: Skill[] = [
+export const Skills: Skill[] = [
   {
     id: "crimson_blossom",
     name: "Crimson Blossom",

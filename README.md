@@ -7,5 +7,5 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 - [x] main page
 - [x] team selection
 - [ ] add skill data
-- [ ] display skill selection based on characters
+- [x] display skill selection based on characters
 - [ ] variations: full | cancel | swap

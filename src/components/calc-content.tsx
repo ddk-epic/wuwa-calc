@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
-import { availableSkills } from "@/constants/constants";
+import { Skills } from "@/constants/constants";
 import TimelineBar from "./timeline/timeline-bar";
 import SelectSkill from "./timeline/skill-selection";
 import TimeMarkers from "./timeline/time-markers";
@@ -16,6 +16,18 @@ export default function CalculatorContent() {
   const [characters, setCharacters] = useState(["", "", ""]);
   const [skillSequence, setSkillSequence] = useState<SequenceSkill[]>([]);
   const [skillStartTime, setSkillStartTime] = useState<number[]>([]);
+
+  const updateAvailableSkills = (characters: string[]) => {
+    const updatedSkills = Skills.filter((skill) =>
+      characters.includes(skill.source.toLowerCase())
+    );
+    return updatedSkills;
+  };
+
+  const availableSkills = useMemo(
+    () => updateAvailableSkills(characters),
+    [characters]
+  );
 
   const calculateTime = (sequence: SequenceSkill[]) => {
     const timeSteps: number[] = [];
@@ -77,7 +89,6 @@ export default function CalculatorContent() {
     const updatedArr = [...characters];
     updatedArr[index] = value;
     setCharacters(updatedArr);
-    console.log("characters", updatedArr);
   };
 
   return (
@@ -91,10 +102,7 @@ export default function CalculatorContent() {
           </p>
         </div>
         <div>
-          <CharacterSelect
-            characters={characters}
-            updateCharacters={handleCharacterChange}
-          />
+          <CharacterSelect updateCharacters={handleCharacterChange} />
         </div>
         <div className="flex gap-2">
           <Button

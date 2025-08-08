@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import { Clock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -15,6 +17,7 @@ interface SelectSkillProps {
 
 export default function SelectSkill(props: SelectSkillProps) {
   const { Skills, addSkill } = props;
+
   return (
     <DialogContent>
       <DialogHeader>
