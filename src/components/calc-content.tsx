@@ -139,11 +139,7 @@ export default function CalculatorContent() {
               </h3>
             )}
           </div>
-          <div
-            className={`pb-3 ${
-              isScrollable ? "overflow-x-auto" : "overflow-hidden"
-            }`}
-          >
+          <div>
             {/* Timeline Header */}
             <div className="flex items-center justify-between text-sm text-muted-foreground">
               <span>Skill Sequence Timeline</span>
@@ -157,7 +153,13 @@ export default function CalculatorContent() {
                 </span>
               )}
             </div>
+          </div>
 
+          <div
+            className={`pb-3 ${
+              isScrollable ? "overflow-x-auto" : "overflow-hidden"
+            }`}
+          >
             {/* Timeline Bar */}
             <div className="pt-2 pb-1">
               {skillSequence.length === 0 ? (
@@ -180,7 +182,10 @@ export default function CalculatorContent() {
             </div>
 
             {/* Time Markers */}
-            <TimeMarkers timelineWidth={timelineWidth} maxSequenceTime={maxSequenceTime} />
+            <TimeMarkers
+              timelineWidth={timelineWidth}
+              maxSequenceTime={maxSequenceTime}
+            />
           </div>
         </CardContent>
       </Card>
