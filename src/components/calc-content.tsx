@@ -19,19 +19,6 @@ export default function CalculatorContent() {
   const [openPopovers, setOpenPopovers] = useState<Record<string, boolean>>({});
   const [characters, setCharacters] = useState(["", "", ""]);
   const [skillSequence, setSkillSequence] = useState<SequenceSkill[]>([]);
-  const [skillStartTime, setSkillStartTime] = useState<number[]>([]);
-
-  const calculateTime = (sequence: SequenceSkill[]) => {
-    const timeSteps: number[] = [];
-    let currentTime = 0;
-
-    sequence.forEach((skill) => {
-      timeSteps.push(currentTime);
-      currentTime += skill.castTime;
-    });
-
-    setSkillStartTime(timeSteps);
-  };
 
   const currentSequenceTime = skillSequence.reduce(
     (total, skill) => Math.max(total, skill.startTime + skill.castTime),
@@ -46,9 +33,8 @@ export default function CalculatorContent() {
   const timeline = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const el = timeline.current;
-    if (!el) return;
-    el.scrollLeft = 0;
+    if (!timeline.current) return;
+    timeline.current.scrollLeft = 0;
   }, [isScrollable]);
 
   const addSkill = (skill: Skill) => {
@@ -64,7 +50,6 @@ export default function CalculatorContent() {
     const newSequence = [...skillSequence, newSkill];
 
     setSkillSequence(newSequence);
-    calculateTime(newSequence);
     //setIsPopoverOpen(false);
   };
 
@@ -86,7 +71,6 @@ export default function CalculatorContent() {
     }
 
     setSkillSequence(recalculatedSequence);
-    calculateTime(recalculatedSequence);
   };
 
   const handleCharacterChange = (index: number, value: string) => {
@@ -241,7 +225,7 @@ export default function CalculatorContent() {
                   <div className="grid grid-cols-[4fr_1fr] w-full items-center p-2">
                     <div className="font-semibold">{skill.name}</div>
                     <div className="text-right">
-                      {skillStartTime[index].toFixed(2)}s
+                      {skillSequence[index].startTime.toFixed(2)}
                     </div>
                   </div>
                 </div>
