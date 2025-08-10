@@ -6,5 +6,5 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function frameToSecond(number: number) {
-  return Number(number.toFixed(2));
+  return Number((number / 60).toFixed(2));
 }
