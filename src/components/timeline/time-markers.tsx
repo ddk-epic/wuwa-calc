@@ -7,9 +7,9 @@ interface TimeMarkersProps {
 
 export default function TimeMarkers(props: TimeMarkersProps) {
   const { timelineWidth, maxSequenceTime } = props;
-  
+
   const markerInterval = 5;
-  const arrayLength = Math.floor(timelineWidth / markerInterval) + 1;
+  const arrayLength = Math.floor(maxSequenceTime / markerInterval) + 1;
   return (
     <>
       {maxSequenceTime > 0 && (
