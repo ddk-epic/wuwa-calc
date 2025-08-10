@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -43,6 +43,13 @@ export default function CalculatorContent() {
   ); // Round up to nearest 10-second interval
   const timelineWidth = Math.min(maxSequenceTime, 30);
   const isScrollable = maxSequenceTime > 30;
+  const timeline = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const el = timeline.current;
+    if (!el) return;
+    el.scrollLeft = 0;
+  }, [isScrollable]);
 
   const addSkill = (skill: Skill) => {
     const startTime =
@@ -153,6 +160,7 @@ export default function CalculatorContent() {
             </div>
             {/* Scrollable Block */}
             <div
+              ref={timeline}
               className={`flex-1 pb-3 ${
                 isScrollable ? "overflow-x-auto" : "overflow-hidden"
               }`}
