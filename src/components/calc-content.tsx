@@ -45,7 +45,10 @@ export default function CalculatorContent() {
     (total, skill) => Math.max(total, skill.startTime + skill.castTime),
     0
   );
-  const maxSequenceTime = Math.ceil(currentSequenceTime / 10) * 10; // Round up to nearest 10-second interval
+  const maxSequenceTime = Math.max(
+    Math.ceil(currentSequenceTime / 10) * 10,
+    10
+  ); // Round up to nearest 10-second interval
   const timelineWidth = Math.min(maxSequenceTime, 30);
   const isScrollable = maxSequenceTime > 30;
 
@@ -143,15 +146,14 @@ export default function CalculatorContent() {
             {/* Timeline Header */}
             <div className="flex items-center justify-between text-sm text-muted-foreground">
               <span>Skill Sequence Timeline</span>
-              {skillSequence.length > 0 && (
+              {
                 <span>
                   Total Duration:{" "}
-                  {skillSequence
-                    .reduce((total, skill) => total + skill.castTime, 0)
-                    .toFixed(2)}
-                  s
+                  {skillSequence.length > 0
+                    ? currentSequenceTime.toFixed(2) + "s"
+                    : "-"}
                 </span>
-              )}
+              }
             </div>
           </div>
 
@@ -162,23 +164,16 @@ export default function CalculatorContent() {
           >
             {/* Timeline Bar */}
             <div className="pt-2 pb-1">
-              {skillSequence.length === 0 ? (
-                <div className="h-40 border-2 border-dashed border-muted-foreground/20 rounded-lg flex items-center justify-center text-muted-foreground bg-muted/10">
-                  No skills in sequence. Click &quot;Add Skill&quot; to get
-                  started.
-                </div>
-              ) : (
-                characters.map((character, index) => (
-                  <TimelineBar
-                    key={index}
-                    character={character}
-                    skillSequence={skillSequence}
-                    timelineWidth={timelineWidth}
-                    maxSequenceTime={maxSequenceTime}
-                    removeSkill={removeSkill}
-                  />
-                ))
-              )}
+              {characters.map((character, index) => (
+                <TimelineBar
+                  key={index}
+                  character={character}
+                  skillSequence={skillSequence}
+                  timelineWidth={timelineWidth}
+                  maxSequenceTime={maxSequenceTime}
+                  removeSkill={removeSkill}
+                />
+              ))}
             </div>
 
             {/* Time Markers */}
@@ -244,10 +239,7 @@ export default function CalculatorContent() {
                     Total Cast Time:
                   </span>
                   <span className="ml-2 font-medium">
-                    {skillSequence
-                      .reduce((total, skill) => total + skill.castTime, 0)
-                      .toFixed(2)}
-                    s
+                    {currentSequenceTime.toFixed(2)}s
                   </span>
                 </div>
               </div>
