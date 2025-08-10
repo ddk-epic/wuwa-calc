@@ -23,11 +23,11 @@ function CharacterSelectGroup() {
   );
 }
 
-interface CharacterSelectProps {
+interface SelectCharacterProps {
   updateCharacters: (index: number, value: string) => void;
 }
 
-export default function CharacterSelect(props: CharacterSelectProps) {
+export default function SelectCharacter(props: SelectCharacterProps) {
   const { updateCharacters } = props;
   const placeholder = ["DPS", "Slot 2", "Slot 3"];
 

@@ -4,15 +4,19 @@ import { useMemo, useState } from "react";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { Skills } from "@/constants/constants";
 import TimelineBar from "./timeline/timeline-bar";
 import SelectSkill from "./timeline/skill-selection";
 import TimeMarkers from "./timeline/time-markers";
-import CharacterSelect from "./char-selection";
+import SelectCharacter from "./char-selection";
 
 export default function CalculatorContent() {
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [openPopovers, setOpenPopovers] = useState<Record<string, boolean>>({});
   const [characters, setCharacters] = useState(["", "", ""]);
   const [skillSequence, setSkillSequence] = useState<SequenceSkill[]>([]);
   const [skillStartTime, setSkillStartTime] = useState<number[]>([]);
@@ -66,7 +70,7 @@ export default function CalculatorContent() {
 
     setSkillSequence(newSequence);
     calculateTime(newSequence);
-    setIsDialogOpen(false);
+    //setIsPopoverOpen(false);
   };
 
   const removeSkill = (index: number) => {
@@ -96,6 +100,8 @@ export default function CalculatorContent() {
     setCharacters(updatedArr);
   };
 
+  const handlePopover = (open: string) => {};
+
   return (
     <div className="w-full max-w-6xl mx-auto p-6 space-y-6">
       {/* Page Header */}
@@ -107,7 +113,7 @@ export default function CalculatorContent() {
           </p>
         </div>
         <div>
-          <CharacterSelect updateCharacters={handleCharacterChange} />
+          <SelectCharacter updateCharacters={handleCharacterChange} />
         </div>
         <div className="flex gap-2">
           <Button
@@ -117,15 +123,6 @@ export default function CalculatorContent() {
           >
             Clear All
           </Button>
-          <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-            <DialogTrigger asChild>
-              <Button>
-                <Plus className="w-4 h-4 mr-1" />
-                Add Skill
-              </Button>
-            </DialogTrigger>
-            <SelectSkill Skills={availableSkills} addSkill={addSkill} />
-          </Dialog>
         </div>
       </div>
 
@@ -156,37 +153,81 @@ export default function CalculatorContent() {
               }
             </div>
           </div>
-
-          <div
-            className={`pb-3 ${
-              isScrollable ? "overflow-x-auto" : "overflow-hidden"
-            }`}
-          >
-            {/* Timeline Bar */}
-            <div className="pt-2 pb-1">
-              {characters.map((character, index) => (
-                <TimelineBar
-                  key={index}
-                  character={character}
-                  skillSequence={skillSequence}
-                  timelineWidth={timelineWidth}
-                  maxSequenceTime={maxSequenceTime}
-                  removeSkill={removeSkill}
-                />
+          <div className="flex w-full">
+            {/* Character Portraits */}
+            <div className="mt-2 border-t rounded-none">
+              {characters.map((character) => (
+                <div className="w-8 h-12 flex justify-center items-center text-2xl font-bold border-b border-x">
+                  {character.charAt(0).toUpperCase()}
+                </div>
               ))}
             </div>
+            {/* Scrollable Block */}
+            <div
+              className={`flex-1 pb-3 ${
+                isScrollable ? "overflow-x-auto" : "overflow-hidden"
+              }`}
+            >
+              {/* Timeline Bar */}
+              <div className="pt-2 pb-1">
+                {characters.map((character, index) => (
+                  <TimelineBar
+                    key={index}
+                    character={character}
+                    skillSequence={skillSequence}
+                    timelineWidth={timelineWidth}
+                    maxSequenceTime={maxSequenceTime}
+                    removeSkill={removeSkill}
+                  />
+                ))}
+              </div>
 
-            {/* Time Markers */}
-            <TimeMarkers
-              timelineWidth={timelineWidth}
-              maxSequenceTime={maxSequenceTime}
-            />
+              {/* Time Markers */}
+              <TimeMarkers
+                timelineWidth={timelineWidth}
+                maxSequenceTime={maxSequenceTime}
+              />
+            </div>
+            {/* Add Skill Button */}
+            <div className="mt-2 border-t">
+              {characters.map((character, index) => (
+                <div key={index} className="h-12">
+                  <Popover
+                    open={openPopovers[character] || false}
+                    onOpenChange={(open) =>
+                      setOpenPopovers((prev) => ({
+                        ...prev,
+                        [character]: open,
+                      }))
+                    }
+                  >
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant="secondary"
+                        className="w-8 h-12 border-b border-x rounded-none hover:bg-background"
+                      >
+                        <Plus className="w-4 h-4" />
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-96 p-0">
+                      <h4 className="p-2 font-semibold text-sm">
+                        {character.charAt(0).toUpperCase() + character.slice(1)}
+                      </h4>
+                      <SelectSkill
+                        Skills={availableSkills}
+                        addSkill={addSkill}
+                      />
+                    </PopoverContent>
+                  </Popover>
+                </div>
+              ))}
+            </div>
           </div>
         </CardContent>
       </Card>
 
       <div className="grid grid-cols-[1fr_2fr] gap-6">
-        {/* Skill Sequence */}
+        {/* Skill Sequence Column */}
         {skillSequence.length > 0 && (
           <Card>
             <CardContent className="px-4 space-y-1">

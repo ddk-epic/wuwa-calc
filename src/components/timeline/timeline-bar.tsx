@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface TimelineBarProps {
   character: string;
@@ -39,7 +39,7 @@ export default function TimelineBar(props: TimelineBarProps) {
               return (
                 <div
                   key={`${skill.id}-${index}`}
-                  className={`absolute top-0 h-full ${skill.bgColor} ${skill.textColor} rounded-md flex items-center justify-between pl-2 text-xs font-medium border-gray-100 border-2 group cursor-pointer transition-all hover:brightness-110`}
+                  className={`absolute top-0 h-full ${skill.bgColor} ${skill.textColor} rounded-sm flex items-center justify-between pl-2 text-xs font-medium border-gray-100 group cursor-pointer transition-all hover:brightness-110`}
                   style={{
                     left: `${getSkillPosition(skill.startTime)}%`,
                     width: `${getSkillWidth(skill.castTime)}%`,
