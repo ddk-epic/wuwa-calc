@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -9,7 +9,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Skills } from "@/constants/constants";
+import { skillData } from "@/constants/constants";
 import TimelineBar from "./timeline/timeline-bar";
 import SelectSkill from "./timeline/skill-selection";
 import TimeMarkers from "./timeline/time-markers";
@@ -20,18 +20,6 @@ export default function CalculatorContent() {
   const [characters, setCharacters] = useState(["", "", ""]);
   const [skillSequence, setSkillSequence] = useState<SequenceSkill[]>([]);
   const [skillStartTime, setSkillStartTime] = useState<number[]>([]);
-
-  const updateAvailableSkills = (characters: string[]) => {
-    const updatedSkills = Skills.filter((skill) =>
-      characters.includes(skill.source.toLowerCase())
-    );
-    return updatedSkills;
-  };
-
-  const availableSkills = useMemo(
-    () => updateAvailableSkills(characters),
-    [characters]
-  );
 
   const calculateTime = (sequence: SequenceSkill[]) => {
     const timeSteps: number[] = [];
@@ -100,8 +88,6 @@ export default function CalculatorContent() {
     setCharacters(updatedArr);
   };
 
-  const handlePopover = (open: string) => {};
-
   return (
     <div className="w-full max-w-6xl mx-auto p-6 space-y-6">
       {/* Page Header */}
@@ -156,8 +142,11 @@ export default function CalculatorContent() {
           <div className="flex w-full">
             {/* Character Portraits */}
             <div className="mt-2 border-t rounded-none">
-              {characters.map((character) => (
-                <div className="w-8 h-12 flex justify-center items-center text-2xl font-bold border-b border-x">
+              {characters.map((character, index) => (
+                <div
+                  key={index}
+                  className="w-8 h-12 flex justify-center items-center text-2xl font-bold border-b border-x"
+                >
                   {character.charAt(0).toUpperCase()}
                 </div>
               ))}
@@ -205,6 +194,7 @@ export default function CalculatorContent() {
                       <Button
                         variant="secondary"
                         className="w-8 h-12 border-b border-x rounded-none hover:bg-background"
+                        disabled={character === ""}
                       >
                         <Plus className="w-4 h-4" />
                       </Button>
@@ -214,7 +204,7 @@ export default function CalculatorContent() {
                         {character.charAt(0).toUpperCase() + character.slice(1)}
                       </h4>
                       <SelectSkill
-                        Skills={availableSkills}
+                        skills={skillData[character]}
                         addSkill={addSkill}
                       />
                     </PopoverContent>
