@@ -9,11 +9,13 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { skillData } from "@/constants/constants";
 import TimelineBar from "./timeline/timeline-bar";
 import SelectSkill from "./timeline/skill-selection";
 import TimeMarkers from "./timeline/time-markers";
 import SelectCharacter from "./char-selection";
+import RotationSummary from "./timeline/summary";
 
 export default function CalculatorContent() {
   const [openPopovers, setOpenPopovers] = useState<Record<string, boolean>>({});
@@ -224,7 +226,7 @@ export default function CalculatorContent() {
                   <div className="grid grid-cols-[4fr_1fr] w-full items-center p-2">
                     <div className="font-semibold">{skill.name}</div>
                     <div className="text-right">
-                      {skillSequence[index].startTime.toFixed(2)}
+                      {skillSequence[index].startTime.toFixed(2)}s
                     </div>
                   </div>
                 </div>
@@ -232,38 +234,33 @@ export default function CalculatorContent() {
             </CardContent>
           </Card>
         )}
-
-        {/* Sequence Summary */}
         {skillSequence.length > 0 && (
           <Card>
             <CardContent className="px-4">
-              <h3 className="font-semibold mb-3">Sequence Summary</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-                <div>
-                  <span className="text-muted-foreground">Total Skills:</span>
-                  <span className="ml-2 font-medium">
-                    {skillSequence.length}
-                  </span>
-                </div>
-                <div>
-                  <span className="text-muted-foreground">
-                    Total Forte Cost:
-                  </span>
-                  <span className="ml-2 font-medium">
-                    {skillSequence
-                      .reduce((total, skill) => total + skill.forte, 0)
-                      .toFixed(2)}
-                  </span>
-                </div>
-                <div>
-                  <span className="text-muted-foreground">
-                    Total Cast Time:
-                  </span>
-                  <span className="ml-2 font-medium">
-                    {currentSequenceTime.toFixed(2)}s
-                  </span>
-                </div>
-              </div>
+              <Tabs defaultValue="summary">
+                <TabsList>
+                  <TabsTrigger
+                    value="summary"
+                    className="text-md font-semibold mb-4"
+                  >
+                    Summary
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="details"
+                    className="text-md font-semibold mb-4"
+                  >
+                    Details
+                  </TabsTrigger>
+                </TabsList>
+                <TabsContent value="summary">
+                  {/* Sequence Summary */}
+                  <RotationSummary
+                    skillSequence={skillSequence}
+                    currentSequenceTime={currentSequenceTime}
+                  />
+                </TabsContent>
+                <TabsContent value="details">Details</TabsContent>
+              </Tabs>
             </CardContent>
           </Card>
         )}
