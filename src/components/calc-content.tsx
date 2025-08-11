@@ -245,7 +245,7 @@ export default function CalculatorContent() {
         )}
         {skillSequence.length > 0 && (
           <Card>
-            <CardContent className="px-4">
+            <CardContent className="px-3">
               <Tabs defaultValue="summary">
                 <TabsList>
                   <TabsTrigger
@@ -261,14 +261,17 @@ export default function CalculatorContent() {
                     Details
                   </TabsTrigger>
                 </TabsList>
-                <TabsContent value="summary">
+                <TabsContent value="summary" className="px-1">
                   {/* Sequence Summary */}
                   <RotationSummary
                     skillSequence={skillSequence}
                     currentSequenceTime={currentSequenceTime}
                   />
                 </TabsContent>
-                <TabsContent value="details">Details</TabsContent>
+                {/* Sequence Details */}
+                <TabsContent value="details" className="px-1">
+                  Details
+                </TabsContent>
               </Tabs>
             </CardContent>
           </Card>
