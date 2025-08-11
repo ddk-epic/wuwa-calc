@@ -4,8 +4,8 @@ const camellya: Skill[] = [
   {
     id: "crimson_blossom",
     name: "Crimson Blossom",
-    source: "Camellya",
     type: "Skill",
+    source: "camellya",
     hits: 2,
     hitframes: [9, 35],
     castTime: frameToSecond(85),
@@ -20,8 +20,8 @@ const camellya: Skill[] = [
   {
     id: "floral_ravage",
     name: "Floral Ravage",
-    source: "Camellya",
     type: "Skill",
+    source: "camellya",
     hits: 5,
     hitframes: [17, 24, 30, 37, 74],
     castTime: frameToSecond(100),
@@ -36,8 +36,8 @@ const camellya: Skill[] = [
   {
     id: "fervor_efflorescent",
     name: "Fervor Efflorescent",
-    source: "Camellya",
     type: "Liberation",
+    source: "camellya",
     hits: 1,
     hitframes: [1],
     castTime: frameToSecond(8),
@@ -52,8 +52,8 @@ const camellya: Skill[] = [
   {
     id: "vining_waltz_123H4",
     name: "Vining Waltz 123H4",
-    source: "Camellya",
     type: "Basic",
+    source: "camellya",
     hits: 31,
     hitframes: [
       20, 30, 50, 62, 68, 74, 80, 86, 92, 92, 56, 62, 68, 74, 80, 86, 92, 98,
@@ -75,8 +75,8 @@ const sanhua: Skill[] = [
   {
     id: "eternal_frost",
     name: "Eternal Frost",
-    source: "Sanhua",
     type: "Skill",
+    source: "sanhua",
     hits: 1,
     hitframes: [10],
     castTime: frameToSecond(60),
@@ -91,8 +91,8 @@ const sanhua: Skill[] = [
   {
     id: "glacial_gaze",
     name: "Glacial Gaze",
-    source: "Sanhua",
     type: "Liberation",
+    source: "sanhua",
     hits: 1,
     hitframes: [1],
     castTime: frameToSecond(98),
@@ -106,4 +106,55 @@ const sanhua: Skill[] = [
   },
 ];
 
-export { camellya, sanhua };
+const shorekeeper: Skill[] = [
+  {
+    id: "chaos_theory",
+    name: "Chaos Theory",
+    type: "Skill",
+    source: "shorekeeper",
+    hits: 5,
+    hitframes: [1, 2, 3, 4, 5],
+    castTime: frameToSecond(42),
+    cooldown: 16,
+    forte: 0,
+    resonance: 10,
+    concerto: 30,
+    state: { isInAir: false, isGroundedForSwap: true },
+    bgColor: "bg-yellow-200",
+    textColor: "text-gray-900",
+  },
+  {
+    id: "end_loop",
+    name: "End Loop",
+    type: "Liberation",
+    source: "shorekeeper",
+    hits: 0,
+    hitframes: [0],
+    castTime: frameToSecond(3),
+    cooldown: 25,
+    forte: 0,
+    resonance: -100,
+    concerto: 20,
+    state: { isInAir: false, isGroundedForSwap: true },
+    bgColor: "bg-yellow-200",
+    textColor: "text-gray-900",
+  },
+  {
+    id: "origin_calculus_1234",
+    name: "Origin Calculus 1234",
+    type: "Basic",
+    source: "shorekeeper",
+    hits: 7,
+    hitframes: [1, 2, 3, 4, 5, 6, 7],
+    castTime: frameToSecond(152),
+    cooldown: 0,
+    forte: 5,
+    resonance: 3.52,
+    concerto: 11.2,
+    state: { isInAir: false, isGroundedForSwap: true },
+    bgColor: "bg-yellow-200",
+    textColor: "text-gray-900",
+  },
+];
+
+export { camellya, sanhua, shorekeeper };

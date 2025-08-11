@@ -1,4 +1,4 @@
-import { camellya, sanhua } from "./skill-data";
+import { camellya, sanhua, shorekeeper } from "./skill-data";
 
 export const characters: string[] = [
   "Encore",
@@ -9,4 +9,5 @@ export const characters: string[] = [
 export const skillData: Record<string, Skill[]> = {
   camellya: camellya,
   sanhua: sanhua,
+  shorekeeper: shorekeeper,
 };
