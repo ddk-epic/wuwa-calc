@@ -50,7 +50,6 @@ export default function CalculatorContent() {
     const newSequence = [...skillSequence, newSkill];
 
     setSkillSequence(newSequence);
-    //setIsPopoverOpen(false);
   };
 
   const removeSkill = (index: number) => {
@@ -75,7 +74,7 @@ export default function CalculatorContent() {
 
   const handleCharacterChange = (index: number, value: string) => {
     const updatedArr = [...characters];
-    updatedArr[index] = value;
+    updatedArr[index] = value.toLowerCase();
     setCharacters(updatedArr);
   };
 
@@ -251,10 +250,9 @@ export default function CalculatorContent() {
                     Total Forte Cost:
                   </span>
                   <span className="ml-2 font-medium">
-                    {skillSequence.reduce(
-                      (total, skill) => total + skill.forte,
-                      0
-                    )}
+                    {skillSequence
+                      .reduce((total, skill) => total + skill.forte, 0)
+                      .toFixed(2)}
                   </span>
                 </div>
                 <div>

@@ -35,7 +35,7 @@ export default function TimelineBar(props: TimelineBarProps) {
       {skillSequence.length > 0 && (
         <div className="relative h-12 bg-muted/20 border border-muted/30 rounded-lg">
           {skillSequence.map((skill, index) => {
-            if (character === skill.source.toLowerCase())
+            if (character === skill.source)
               return (
                 <div
                   key={`${skill.id}-${index}`}
@@ -53,7 +53,7 @@ export default function TimelineBar(props: TimelineBarProps) {
                       </span>
                     </div>
                     <div className="text-xs opacity-85 truncate">
-                      {skill.castTime}s
+                      {skill.castTime.toFixed(2)}s
                     </div>
                   </div>
                   <Button

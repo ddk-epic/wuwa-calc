@@ -15,7 +15,7 @@ function CharacterSelectGroup() {
   return (
     <SelectGroup>
       {characters.map((name) => (
-        <SelectItem key={name.toLowerCase()} value={name.toLowerCase()}>
+        <SelectItem key={name} value={name}>
           {name}
         </SelectItem>
       ))}

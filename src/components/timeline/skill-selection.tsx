@@ -40,7 +40,7 @@ export default function SelectSkill(props: SelectSkillProps) {
                 <div className="flex flex-shrink-0 text-xs items-center">
                   <Badge variant="secondary" className="text-xs opacity-85">
                     <Clock className="w-3 h-3 mr-1" />
-                    {skill.castTime}s
+                    {skill.castTime.toFixed(2)}s
                   </Badge>
                   {skill.cooldown ? (
                     <Badge
