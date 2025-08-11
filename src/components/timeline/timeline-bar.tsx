@@ -39,14 +39,27 @@ export default function TimelineBar(props: TimelineBarProps) {
               return (
                 <div
                   key={`${skill.id}-${index}`}
-                  className={`absolute top-0 h-full ${skill.bgColor} ${skill.textColor} rounded-sm flex items-center justify-between pl-2 text-xs font-medium border-gray-100 group cursor-pointer transition-all hover:brightness-110`}
+                  title={skill.name}
+                  className={`absolute top-0 h-full ${skill.bgColor} ${skill.textColor} rounded-sm flex items-center justify-between text-xs font-medium border-gray-100 group cursor-pointer transition-all hover:brightness-110`}
                   style={{
                     left: `${getSkillPosition(skill.startTime)}%`,
                     width: `${getSkillWidth(skill.castTime)}%`,
                     minWidth: "20px",
                   }}
                 >
-                  <div className="flex-1 min-w-0">
+                  <div className="relative h-full z-10">
+                    <div className="absolute">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="opacity-0 group-hover:opacity-100 transition-opacity size-6 p-0 hover:bg-white/20"
+                        onClick={() => removeSkill(index)}
+                      >
+                        <X className="w-2 h-2" />
+                      </Button>
+                    </div>
+                  </div>
+                  <div className="flex-1 min-w-0 px-1 truncate">
                     <div className="flex items-center gap-1 mb-0.5">
                       <span className="font-semibold truncate">
                         {skill.name}
@@ -56,14 +69,6 @@ export default function TimelineBar(props: TimelineBarProps) {
                       {skill.castTime.toFixed(2)}s
                     </div>
                   </div>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="opacity-0 group-hover:opacity-100 transition-opacity size-6 p-0 hover:bg-white/20"
-                    onClick={() => removeSkill(index)}
-                  >
-                    <X className="w-2 h-2" />
-                  </Button>
                 </div>
               );
           })}
