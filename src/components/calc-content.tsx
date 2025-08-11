@@ -137,7 +137,7 @@ export default function CalculatorContent() {
               }
             </div>
           </div>
-          <div className="flex w-full">
+          <div className={`flex w-full ${isScrollable ? "pb-0" : "pb-3"}`}>
             {/* Character Portraits */}
             <div className="mt-2 border-t rounded-none">
               {characters.map((character, index) => (
@@ -231,7 +231,12 @@ export default function CalculatorContent() {
                   className={`${skill.bgColor} ${skill.textColor} rounded-sm flex items-center justify-between text-xs font-medium group cursor-pointer transition-all hover:brightness-110`}
                 >
                   <div className="grid grid-cols-[4fr_1fr] w-full items-center py-1 px-2">
-                    <div className="font-semibold">{skill.name}</div>
+                    <div
+                      title={`${skill.type}: ${skill.name}`}
+                      className="font-semibold"
+                    >
+                      {skill.type}: {skill.name}
+                    </div>
                     <div className="text-right">
                       <span className={`${FontMono.className}`}>
                         {skill.startTime.toFixed(2)}s

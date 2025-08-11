@@ -16,12 +16,12 @@ export default function SelectSkill(props: SelectSkillProps) {
   const { fontMono, skills, addSkill } = props;
 
   return (
-    <div className="max-h-94 space-y-2 pt-0 pb-2 overflow-y-auto">
+    <div className="max-h-94 space-y-1 pt-0 pb-2 overflow-y-auto">
       {skills &&
         skills.map((skill) => (
           <Card
             key={skill.id}
-            className="cursor-pointer hover:shadow-md transition-shadow p-1 mx-2"
+            className="p-1 mx-2 rounded-sm cursor-pointer hover:shadow-md transition-shadow"
             onClick={() => addSkill(skill)}
           >
             <CardContent className="px-1">
