@@ -87,19 +87,19 @@ export default function CalculatorContent() {
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto p-6 space-y-6">
+    <div className="min-w-[1120px] max-w-6xl mx-auto p-6 space-y-6">
       {/* Page Header */}
-      <div className="flex items-center justify-between">
+      <div className="grid grid-cols-3">
         <div>
           <h1 className="text-2xl font-bold">Skill Sequence Builder</h1>
           <p className="text-muted-foreground">
             Plan your character&apos;s ability rotation
           </p>
         </div>
-        <div>
+        <div className="w-[510px] pt-2">
           <SelectCharacter updateCharacters={handleCharacterChange} />
         </div>
-        <div className="flex gap-2">
+        <div className="justify-self-end pt-2.5">
           <Button
             variant="outline"
             onClick={() => setSkillSequence([])} // clear
