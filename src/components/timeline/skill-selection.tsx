@@ -4,14 +4,16 @@ import React from "react";
 import { Clock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { NextFontWithVariable } from "next/dist/compiled/@next/font";
 
 interface SelectSkillProps {
+  fontMono: NextFontWithVariable;
   skills: Skill[];
   addSkill: (skill: Skill) => void;
 }
 
 export default function SelectSkill(props: SelectSkillProps) {
-  const { skills, addSkill } = props;
+  const { fontMono, skills, addSkill } = props;
 
   return (
     <div className="max-h-94 space-y-2 pt-0 pb-2 overflow-y-auto">
@@ -25,7 +27,7 @@ export default function SelectSkill(props: SelectSkillProps) {
             <CardContent className="px-1">
               <div className="flex justify-between items-center">
                 {/* left side */}
-                <div className="flex flex-1 gap-2">
+                <div className="max-w-54 flex gap-2">
                   <div
                     className={`w-3 h-3 rounded-full ${skill.bgColor} mt-1 flex-shrink-0`} // dot
                   />
@@ -37,17 +39,22 @@ export default function SelectSkill(props: SelectSkillProps) {
                   </h3>
                 </div>
                 {/* right side */}
-                <div className="flex flex-shrink-0 text-xs items-center">
+                <div className="flex flex-shrink-0 text-xs items-center gap-0.5">
                   <Badge variant="secondary" className="text-xs opacity-85">
                     <Clock className="w-3 h-3 mr-1" />
-                    {skill.castTime.toFixed(2)}s
+                    <span className={`${fontMono.className}`}>
+                      {skill.castTime.toFixed(2)}s
+                    </span>
                   </Badge>
                   {skill.cooldown ? (
                     <Badge
                       variant="outline"
                       className="w-14 text-xs opacity-85"
                     >
-                      CD: {skill.cooldown}s
+                      CD:{" "}
+                      <span className={`${fontMono.className}`}>
+                        {skill.cooldown}s
+                      </span>
                     </Badge>
                   ) : (
                     <div className="w-14"></div>

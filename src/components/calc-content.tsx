@@ -16,6 +16,12 @@ import SelectSkill from "./timeline/skill-selection";
 import TimeMarkers from "./timeline/time-markers";
 import SelectCharacter from "./char-selection";
 import RotationSummary from "./timeline/summary";
+import { Noto_Sans } from "next/font/google";
+
+const FontMono = Noto_Sans({
+  variable: "--font-roboto-mono",
+  subsets: ["latin"],
+});
 
 export default function CalculatorContent() {
   const [openPopovers, setOpenPopovers] = useState<Record<string, boolean>>({});
@@ -197,6 +203,7 @@ export default function CalculatorContent() {
                         {character.charAt(0).toUpperCase() + character.slice(1)}
                       </h4>
                       <SelectSkill
+                        fontMono={FontMono}
                         skills={skillData[character]}
                         addSkill={addSkill}
                       />
@@ -223,10 +230,12 @@ export default function CalculatorContent() {
                   key={`${skill.id}-${index}`}
                   className={`${skill.bgColor} ${skill.textColor} rounded-sm flex items-center justify-between text-xs font-medium group cursor-pointer transition-all hover:brightness-110`}
                 >
-                  <div className="grid grid-cols-[4fr_1fr] w-full items-center p-2">
+                  <div className="grid grid-cols-[4fr_1fr] w-full items-center py-1 px-2">
                     <div className="font-semibold">{skill.name}</div>
                     <div className="text-right">
-                      {skillSequence[index].startTime.toFixed(2)}s
+                      <span className={`${FontMono.className}`}>
+                        {skill.startTime.toFixed(2)}s
+                      </span>
                     </div>
                   </div>
                 </div>

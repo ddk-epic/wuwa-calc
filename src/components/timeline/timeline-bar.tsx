@@ -39,7 +39,7 @@ export default function TimelineBar(props: TimelineBarProps) {
               return (
                 <div
                   key={`${skill.id}-${index}`}
-                  title={skill.name}
+                  title={`${skill.type}: ${skill.name}`}
                   className={`absolute top-0 h-full ${skill.bgColor} ${skill.textColor} rounded-sm flex items-center justify-between text-xs font-medium border-gray-100 group cursor-pointer transition-all hover:brightness-110`}
                   style={{
                     left: `${getSkillPosition(skill.startTime)}%`,
