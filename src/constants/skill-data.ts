@@ -1,12 +1,11 @@
 import { frameToSecond } from "@/lib/utils";
 
-const camellya: Skill[] = [
+export const camellya_skills: Skill[] = [
   {
     id: "crimson_blossom",
     name: "Crimson Blossom",
     type: "Skill",
     source: "camellya",
-    hits: 2,
     hitframes: [9, 35],
     castTime: frameToSecond(85),
     cooldown: 4,
@@ -22,7 +21,6 @@ const camellya: Skill[] = [
     name: "Floral Ravage",
     type: "Skill",
     source: "camellya",
-    hits: 5,
     hitframes: [17, 24, 30, 37, 74],
     castTime: frameToSecond(100),
     cooldown: 4,
@@ -38,7 +36,6 @@ const camellya: Skill[] = [
     name: "Fervor Efflorescent",
     type: "Liberation",
     source: "camellya",
-    hits: 1,
     hitframes: [1],
     castTime: frameToSecond(8),
     cooldown: 25,
@@ -54,7 +51,6 @@ const camellya: Skill[] = [
     name: "Vining Waltz 123H4",
     type: "Basic",
     source: "camellya",
-    hits: 31,
     hitframes: [
       20, 30, 50, 62, 68, 74, 80, 86, 92, 92, 56, 62, 68, 74, 80, 86, 92, 98,
       106, 110, 116, 122, 128, 134, 140, 146, 152, 158, 180, 186, 218,
@@ -71,13 +67,12 @@ const camellya: Skill[] = [
   },
 ];
 
-const sanhua: Skill[] = [
+export const sanhua_skills: Skill[] = [
   {
     id: "eternal_frost",
     name: "Eternal Frost",
     type: "Skill",
     source: "sanhua",
-    hits: 1,
     hitframes: [10],
     castTime: frameToSecond(60),
     cooldown: 10,
@@ -93,8 +88,7 @@ const sanhua: Skill[] = [
     name: "Glacial Gaze",
     type: "Liberation",
     source: "sanhua",
-    hits: 1,
-    hitframes: [1],
+    hitframes: [0],
     castTime: frameToSecond(98),
     cooldown: 16,
     forte: 0,
@@ -106,13 +100,12 @@ const sanhua: Skill[] = [
   },
 ];
 
-const shorekeeper: Skill[] = [
+export const shorekeeper_skills: Skill[] = [
   {
     id: "chaos_theory",
     name: "Chaos Theory",
     type: "Skill",
     source: "shorekeeper",
-    hits: 5,
     hitframes: [1, 2, 3, 4, 5],
     castTime: frameToSecond(42),
     cooldown: 16,
@@ -128,8 +121,7 @@ const shorekeeper: Skill[] = [
     name: "End Loop",
     type: "Liberation",
     source: "shorekeeper",
-    hits: 0,
-    hitframes: [0],
+    hitframes: [],
     castTime: frameToSecond(3),
     cooldown: 25,
     forte: 0,
@@ -144,7 +136,6 @@ const shorekeeper: Skill[] = [
     name: "Origin Calculus 1234",
     type: "Basic",
     source: "shorekeeper",
-    hits: 7,
     hitframes: [1, 2, 3, 4, 5, 6, 7],
     castTime: frameToSecond(152),
     cooldown: 0,
@@ -157,4 +148,3 @@ const shorekeeper: Skill[] = [
   },
 ];
 
-export { camellya, sanhua, shorekeeper };
