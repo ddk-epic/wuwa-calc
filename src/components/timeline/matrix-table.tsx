@@ -6,7 +6,7 @@ interface MatrixTableProps {
   data: number[][];
 }
 
-export function MatrixTable({ data }: MatrixTableProps) {
+export default function MatrixTable({ data }: MatrixTableProps) {
   const rowHeaders = totalBuffMap.map((_, index) => index + 1);
   const columnHeaders = totalBuffMapKeys;
 

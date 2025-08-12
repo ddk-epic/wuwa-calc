@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { Noto_Sans } from "next/font/google";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -16,8 +17,7 @@ import SelectSkill from "./timeline/skill-selection";
 import TimeMarkers from "./timeline/time-markers";
 import SelectCharacter from "./timeline/char-selection";
 import RotationSummary from "./timeline/summary";
-import { Noto_Sans } from "next/font/google";
-import { MatrixTable } from "./timeline/matrix-table";
+import MatrixTable from "./timeline/matrix-table";
 
 const FontMono = Noto_Sans({
   variable: "--font-roboto-mono",
@@ -222,10 +222,12 @@ export default function CalculatorContent() {
         {skillSequence.length > 0 && (
           <Card>
             <CardContent className="px-4 space-y-1">
-              <h3 className="font-semibold px-2 mb-3.5">Rotation</h3>
+              <h3 className="font-semibold px-2 mb-4">Rotation</h3>
               <div className="grid grid-cols-[4fr_1fr] w-full items-center px-2">
-                <h3 className="text-sm mb-1 opacity-70">Action</h3>
-                <h3 className="text-sm text-right mb-1 opacity-70">Time</h3>
+                <h3 className="text-muted-foreground text-sm mb-1">Action</h3>
+                <h3 className="text-muted-foreground text-sm text-right mb-1">
+                  Time
+                </h3>
               </div>
               {skillSequence.map((skill, index) => (
                 <div
@@ -270,10 +272,7 @@ export default function CalculatorContent() {
                 </TabsList>
                 <TabsContent value="summary" className="px-1">
                   {/* Sequence Summary */}
-                  <RotationSummary
-                    skillSequence={skillSequence}
-                    currentSequenceTime={currentSequenceTime}
-                  />
+                  <RotationSummary />
                 </TabsContent>
                 {/* Sequence Details */}
                 <TabsContent value="details" className="px-1">
