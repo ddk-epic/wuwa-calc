@@ -51,9 +51,8 @@ export default function SelectSkill(props: SelectSkillProps) {
                       variant="outline"
                       className="w-14 text-xs opacity-85"
                     >
-                      CD:{" "}
                       <span className={`${fontMono.className}`}>
-                        {skill.cooldown}s
+                        CD: {skill.cooldown}s
                       </span>
                     </Badge>
                   ) : (

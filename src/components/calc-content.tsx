@@ -10,13 +10,14 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { skillData } from "@/constants/constants";
+import { skillData, totalBuffMap } from "@/constants/constants";
 import TimelineBar from "./timeline/timeline-bar";
 import SelectSkill from "./timeline/skill-selection";
 import TimeMarkers from "./timeline/time-markers";
-import SelectCharacter from "./char-selection";
+import SelectCharacter from "./timeline/char-selection";
 import RotationSummary from "./timeline/summary";
 import { Noto_Sans } from "next/font/google";
+import { MatrixTable } from "./timeline/matrix-table";
 
 const FontMono = Noto_Sans({
   variable: "--font-roboto-mono",
@@ -216,7 +217,7 @@ export default function CalculatorContent() {
         </CardContent>
       </Card>
 
-      <div className="grid grid-cols-[1fr_2fr] gap-6">
+      <div className="grid grid-cols-[1fr_3fr] gap-6">
         {/* Skill Sequence Column */}
         {skillSequence.length > 0 && (
           <Card>
@@ -275,7 +276,7 @@ export default function CalculatorContent() {
                 </TabsContent>
                 {/* Sequence Details */}
                 <TabsContent value="details" className="px-1">
-                  Details
+                  <MatrixTable data={totalBuffMap} />
                 </TabsContent>
               </Tabs>
             </CardContent>
