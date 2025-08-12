@@ -222,9 +222,10 @@ export default function CalculatorContent() {
         {skillSequence.length > 0 && (
           <Card>
             <CardContent className="px-4 space-y-1">
+              <h3 className="font-semibold px-2 mb-3.5">Rotation</h3>
               <div className="grid grid-cols-[4fr_1fr] w-full items-center px-2">
-                <h3 className="font-semibold mb-3">Rotation</h3>
-                <h3 className="text-right font-semibold mb-3">Time</h3>
+                <h3 className="text-sm mb-1 opacity-70">Action</h3>
+                <h3 className="text-sm text-right mb-1 opacity-70">Time</h3>
               </div>
               {skillSequence.map((skill, index) => (
                 <div
