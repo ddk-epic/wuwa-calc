@@ -235,7 +235,7 @@ export default function CalculatorContent() {
                   <div className="grid grid-cols-[4fr_1fr] w-full items-center py-1 px-2">
                     <div
                       title={`${skill.type}: ${skill.name}`}
-                      className="font-semibold"
+                      className="min-w-36 font-semibold truncate"
                     >
                       {skill.type}: {skill.name}
                     </div>
