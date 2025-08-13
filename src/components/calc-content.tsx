@@ -276,7 +276,7 @@ export default function CalculatorContent() {
                 </TabsContent>
                 {/* Sequence Details */}
                 <TabsContent value="details" className="px-1">
-                  <MatrixTable data={totalBuffMap} />
+                  <MatrixTable fontMono={FontMono} data={totalBuffMap} />
                 </TabsContent>
               </Tabs>
             </CardContent>
