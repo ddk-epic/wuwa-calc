@@ -272,7 +272,7 @@ export default function CalculatorContent() {
                 </TabsList>
                 <TabsContent value="summary" className="px-1">
                   {/* Sequence Summary */}
-                  <RotationSummary />
+                  <RotationSummary characters={characters} />
                 </TabsContent>
                 {/* Sequence Details */}
                 <TabsContent value="details" className="px-1">
