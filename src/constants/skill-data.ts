@@ -4,6 +4,8 @@ export const camellya_skills: Skill[] = [
   {
     id: "crimson_blossom",
     name: "Crimson Blossom",
+    damage: 1.143,
+    scaling: "Attack",
     type: "Skill",
     source: "camellya",
     hitframes: [9, 35],
@@ -19,6 +21,8 @@ export const camellya_skills: Skill[] = [
   {
     id: "floral_ravage",
     name: "Floral Ravage",
+    damage: 1.323,
+    scaling: "Attack",
     type: "Skill",
     source: "camellya",
     hitframes: [17, 24, 30, 37, 74],
@@ -34,6 +38,8 @@ export const camellya_skills: Skill[] = [
   {
     id: "fervor_efflorescent",
     name: "Fervor Efflorescent",
+    damage: 6.05,
+    scaling: "Attack",
     type: "Liberation",
     source: "camellya",
     hitframes: [1],
@@ -49,13 +55,14 @@ export const camellya_skills: Skill[] = [
   {
     id: "vining_waltz_123H4",
     name: "Vining Waltz 123H4",
+    damage: 4.7235,
+    scaling: "Attack",
     type: "Basic",
     source: "camellya",
     hitframes: [
       20, 30, 50, 62, 68, 74, 80, 86, 92, 92, 56, 62, 68, 74, 80, 86, 92, 98,
       106, 110, 116, 122, 128, 134, 140, 146, 152, 158, 180, 186, 218,
     ],
-
     castTime: frameToSecond(339),
     cooldown: 0,
     forte: 23.55,
@@ -71,6 +78,8 @@ export const sanhua_skills: Skill[] = [
   {
     id: "eternal_frost",
     name: "Eternal Frost",
+    damage: 1.81,
+    scaling: "Attack",
     type: "Skill",
     source: "sanhua",
     hitframes: [10],
@@ -86,6 +95,8 @@ export const sanhua_skills: Skill[] = [
   {
     id: "glacial_gaze",
     name: "Glacial Gaze",
+    damage: 4.0716,
+    scaling: "Attack",
     type: "Liberation",
     source: "sanhua",
     hitframes: [0],
@@ -104,6 +115,8 @@ export const shorekeeper_skills: Skill[] = [
   {
     id: "chaos_theory",
     name: "Chaos Theory",
+    damage: 0.7875,
+    scaling: "Attack",
     type: "Skill",
     source: "shorekeeper",
     hitframes: [1, 2, 3, 4, 5],
@@ -119,13 +132,15 @@ export const shorekeeper_skills: Skill[] = [
   {
     id: "end_loop",
     name: "End Loop",
+    damage: 0,
+    scaling: "Health",
     type: "Liberation",
     source: "shorekeeper",
     hitframes: [],
     castTime: frameToSecond(3),
     cooldown: 25,
     forte: 0,
-    resonance: -100,
+    resonance: -175,
     concerto: 20,
     state: { isInAir: false, isGroundedForSwap: true },
     bgColor: "bg-yellow-200",
@@ -134,6 +149,8 @@ export const shorekeeper_skills: Skill[] = [
   {
     id: "origin_calculus_1234",
     name: "Origin Calculus 1234",
+    damage: 1.1176,
+    scaling: "Attack",
     type: "Basic",
     source: "shorekeeper",
     hitframes: [1, 2, 3, 4, 5, 6, 7],
@@ -147,4 +164,3 @@ export const shorekeeper_skills: Skill[] = [
     textColor: "text-gray-900",
   },
 ];
-

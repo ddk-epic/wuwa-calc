@@ -2,14 +2,15 @@
 interface SkillState {
   isInAir: boolean;
   isGroundedForSwap: boolean;
-
 }
 
 interface Skill {
   id: string;
   name: string;
-  source: string;
+  damage: number;
+  scaling: "Attack" | "Defense" | "Health";
   type: "Basic" | "Heavy" | "Skill" | "Liberation" | "Coord";
+  source: string;
   hitframes: number[];
   castTime: number; // in frames, 60/s
   cooldown: number;
