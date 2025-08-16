@@ -28,7 +28,10 @@ const FontMono = Noto_Sans({
 export default function CalculatorContent() {
   const [openPopovers, setOpenPopovers] = useState<Record<string, boolean>>({});
   const [team, setTeam] = usePersistedState("team", ["", "", ""]);
-  const [skillSequence, setSkillSequence] = useState<SequenceSkill[]>([]);
+  const [skillSequence, setSkillSequence] = usePersistedState<SequenceSkill[]>(
+    "skills",
+    []
+  );
 
   const currentSequenceTime = skillSequence.reduce(
     (total, skill) => Math.max(total, skill.startTime + skill.castTime),
@@ -269,7 +272,7 @@ export default function CalculatorContent() {
                 </TabsList>
                 <TabsContent value="summary" className="px-1">
                   {/* Sequence Summary */}
-                  <RotationSummary characters={team} />
+                  <RotationSummary team={team} />
                 </TabsContent>
                 {/* Sequence Details */}
                 <TabsContent value="details" className="px-1">
