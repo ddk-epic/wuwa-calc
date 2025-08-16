@@ -1,3 +1,5 @@
+import { Echo } from "./types";
+
 export const echoes: Echo[] = [
   {
     name: "Nightmare: Crownless",

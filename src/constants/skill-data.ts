@@ -1,4 +1,5 @@
 import { frameToSecond } from "@/lib/utils";
+import { Skill } from "./types";
 
 export const camellya_skills: Skill[] = [
   {
