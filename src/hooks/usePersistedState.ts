@@ -6,13 +6,13 @@ export function usePersistedState<T>(key: string, initialValue: T) {
 
   // on mount
   useEffect(() => {
-    let saved = getItem(key, initialValue);
+    const saved = getItem(key, initialValue);
     if (saved) setValue(saved);
-  }, []);
+  }, [initialValue, key]);
 
   useEffect(() => {
     setItem(key, value);
-  }, [value]);
+  }, [key, value]);
 
   return [value, setValue] as const;
 }

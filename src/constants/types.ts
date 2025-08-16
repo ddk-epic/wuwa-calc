@@ -1,10 +1,10 @@
 // Skill
-interface SkillState {
+export interface SkillState {
   isInAir: boolean;
   isGroundedForSwap: boolean;
 }
 
-interface Skill {
+export interface Skill {
   id: string;
   name: string;
   damage: number;
@@ -22,12 +22,12 @@ interface Skill {
   textColor: string;
 }
 
-interface SequenceSkill extends Skill {
+export interface SequenceSkill extends Skill {
   startTime: number;
 }
 
 // Character
-interface Weapon {
+export interface Weapon {
   name: string;
   type: string;
   rank: number;
@@ -37,7 +37,7 @@ interface Weapon {
   buff: string;
 }
 
-interface Echo {
+export interface Echo {
   name: string;
   set: string;
   damage: number;
@@ -50,7 +50,7 @@ interface Echo {
   hasBuff: boolean;
 }
 
-interface Character {
+export interface Character {
   name: string;
   sequenceChain: number;
   weapon: Weapon;

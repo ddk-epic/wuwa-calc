@@ -1,5 +1,6 @@
 import { echoes } from "./echo-data";
 import { weapons } from "./weapon-data";
+import { Character } from "./types";
 
 export const camellya: Character = {
   name: "Camellya",

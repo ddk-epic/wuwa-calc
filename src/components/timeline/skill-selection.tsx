@@ -4,6 +4,7 @@ import React from "react";
 import { Clock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { Skill } from "@/constants/types";
 
 interface SelectSkillProps {
   skills: Skill[];

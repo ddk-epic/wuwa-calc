@@ -18,6 +18,7 @@ import SelectCharacter from "./timeline/char-selection";
 import RotationSummary from "./timeline/summary";
 import MatrixTable from "./timeline/matrix-table";
 import { usePersistedState } from "@/hooks/usePersistedState";
+import { SequenceSkill, Skill } from "@/constants/types";
 
 export default function CalculatorContent() {
   const [openPopovers, setOpenPopovers] = useState<Record<string, boolean>>({});
@@ -198,7 +199,6 @@ export default function CalculatorContent() {
                     <PopoverContent className="w-96 p-0">
                       <h4 className="p-2 font-semibold text-sm">{character}</h4>
                       <SelectSkill
-                      
                         skills={skillData[character.toLowerCase()]}
                         addSkill={addSkill}
                       />

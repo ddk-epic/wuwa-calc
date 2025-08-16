@@ -2,6 +2,7 @@
 
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { SequenceSkill } from "@/constants/types";
 
 interface TimelineBarProps {
   character: string;

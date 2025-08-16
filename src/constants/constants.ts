@@ -4,6 +4,7 @@ import {
   sanhua_skills,
   shorekeeper_skills,
 } from "./skill-data";
+import { Skill, Character } from "./types";
 
 export const characters: string[] = [
   "Encore",

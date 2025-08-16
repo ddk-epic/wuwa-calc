@@ -1,3 +1,5 @@
+import { Weapon } from "./types";
+
 export const weapons: Weapon[] = [
   {
     name: "Stringmaster (5☆)",
