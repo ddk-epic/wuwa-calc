@@ -1,10 +1,12 @@
 import React from "react";
 
 interface RotationSummaryProps {
-  characters: string[];
+  team: string[];
 }
 
-export default function RotationSummary({ characters }: RotationSummaryProps) {
+export default function RotationSummary(props: RotationSummaryProps) {
+  const { team } = props;
+
   const damageTypes = {
     "Total Damage": 215296,
     Basic: 15237,
@@ -15,13 +17,7 @@ export default function RotationSummary({ characters }: RotationSummaryProps) {
     Other: 1272,
   };
 
-  const rowHeaders = [
-    "Damage Breakdown",
-    "Total",
-    characters[0],
-    characters[1],
-    characters[2],
-  ];
+  const rowHeaders = ["Damage Breakdown", "Total", team[0], team[1], team[2]];
 
   const damageBreakdown = {
     Total: [134702.4533, 751232.2777, 37349.28383],
@@ -39,22 +35,22 @@ export default function RotationSummary({ characters }: RotationSummaryProps) {
     <div className="ml-2">
       <div className="grid grid-cols-5 text-sm">
         <div className="col-span-2 flex">
-          <div className="w-15 text-muted-foreground">
+          <div className="w-24 text-muted-foreground">
             {Object.keys(damageTypes)[0]}:
           </div>
-          <div className="ml-4 font-medium text-4xl py-0.5">
+          <div className="font-mono ml-4 font-medium text-4xl py-0.5">
             {Object.values(damageTypes)[0]}
           </div>
         </div>
-        <div className="col-span-3 grid grid-cols-3">
-          {Object.entries(damageTypes)
-            .slice(1)
-            .map(([type, value]) => (
-              <div key={type}>
-                <span className="text-muted-foreground">{type}:</span>
-                <span className="ml-2 font-medium">{value}</span>
-              </div>
-            ))}
+        <div className="col-span-3">
+          <div className="grid grid-cols-5 py-0.5">
+            <span className="text-muted-foreground">DPS&nbsp;(Opener):</span>
+            <span className="font-mono ml-5 font-medium">57395</span>
+          </div>
+          <div className="grid grid-cols-5">
+            <span className="text-muted-foreground">DPS (Loop):</span>
+            <span className="font-mono ml-5 font-medium">59481</span>
+          </div>
         </div>
       </div>
       <div className="grid grid-cols-5 pt-6 text-sm">
@@ -74,17 +70,19 @@ export default function RotationSummary({ characters }: RotationSummaryProps) {
           const values = Object.entries(damageBreakdown)[i][1];
           return (
             <React.Fragment key={i}>
-              <div>
+              <div className="py-0.5">
                 <span className="text-muted-foreground">{type}</span>
               </div>
-              <div>
-                <span className="font-medium">
+              <div className="py-0.5">
+                <span className="font-mono font-medium">
                   {values.reduce((acc, value) => acc + value, 0).toFixed(0)}
                 </span>
               </div>
               {values.map((damage, dIndex) => (
-                <div key={`${i}-${dIndex}`}>
-                  <span className="font-medium">{damage.toFixed(0)}</span>
+                <div key={`${i}-${dIndex}`} className="py-0.5">
+                  <span className="font-mono font-medium">
+                    {damage.toFixed(0)}
+                  </span>
                 </div>
               ))}
             </React.Fragment>

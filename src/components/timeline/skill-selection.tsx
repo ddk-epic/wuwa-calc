@@ -4,16 +4,14 @@ import React from "react";
 import { Clock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { NextFontWithVariable } from "next/dist/compiled/@next/font";
 
 interface SelectSkillProps {
-  fontMono: NextFontWithVariable;
   skills: Skill[];
   addSkill: (skill: Skill) => void;
 }
 
 export default function SelectSkill(props: SelectSkillProps) {
-  const { fontMono, skills, addSkill } = props;
+  const { skills, addSkill } = props;
 
   return (
     <div className="max-h-94 space-y-1 pt-0 pb-2 overflow-y-auto">
@@ -27,7 +25,7 @@ export default function SelectSkill(props: SelectSkillProps) {
             <CardContent className="px-1">
               <div className="flex justify-between items-center">
                 {/* left side */}
-                <div className="max-w-54 flex gap-2">
+                <div className="max-w-56 flex gap-2">
                   <div
                     className={`w-3 h-3 rounded-full ${skill.bgColor} mt-1 flex-shrink-0`} // dot
                   />
@@ -42,7 +40,7 @@ export default function SelectSkill(props: SelectSkillProps) {
                 <div className="flex flex-shrink-0 text-xs items-center gap-0.5">
                   <Badge variant="secondary" className="text-xs opacity-85">
                     <Clock className="w-3 h-3 mr-1" />
-                    <span className={`${fontMono.className}`}>
+                    <span className="font-mono">
                       {skill.castTime.toFixed(2)}s
                     </span>
                   </Badge>
@@ -51,9 +49,7 @@ export default function SelectSkill(props: SelectSkillProps) {
                       variant="outline"
                       className="w-14 text-xs opacity-85"
                     >
-                      <span className={`${fontMono.className}`}>
-                        CD: {skill.cooldown}s
-                      </span>
+                      <span className="font-mono">CD: {skill.cooldown}s</span>
                     </Badge>
                   ) : (
                     <div className="w-14"></div>

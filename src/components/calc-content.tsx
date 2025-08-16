@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Noto_Sans } from "next/font/google";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -19,11 +18,6 @@ import SelectCharacter from "./timeline/char-selection";
 import RotationSummary from "./timeline/summary";
 import MatrixTable from "./timeline/matrix-table";
 import { usePersistedState } from "@/hooks/usePersistedState";
-
-const FontMono = Noto_Sans({
-  variable: "--font-roboto-mono",
-  subsets: ["latin"],
-});
 
 export default function CalculatorContent() {
   const [openPopovers, setOpenPopovers] = useState<Record<string, boolean>>({});
@@ -204,7 +198,7 @@ export default function CalculatorContent() {
                     <PopoverContent className="w-96 p-0">
                       <h4 className="p-2 font-semibold text-sm">{character}</h4>
                       <SelectSkill
-                        fontMono={FontMono}
+                      
                         skills={skillData[character.toLowerCase()]}
                         addSkill={addSkill}
                       />
@@ -242,7 +236,7 @@ export default function CalculatorContent() {
                       {skill.type}: {skill.name}
                     </div>
                     <div className="text-right">
-                      <span className={`${FontMono.className}`}>
+                      <span className="font-mono">
                         {skill.startTime.toFixed(2)}s
                       </span>
                     </div>
@@ -276,7 +270,7 @@ export default function CalculatorContent() {
                 </TabsContent>
                 {/* Sequence Details */}
                 <TabsContent value="details" className="px-1">
-                  <MatrixTable fontMono={FontMono} data={totalBuffMap} />
+                  <MatrixTable data={totalBuffMap} />
                 </TabsContent>
               </Tabs>
             </CardContent>

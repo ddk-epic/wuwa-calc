@@ -1,11 +1,16 @@
 import type React from "react";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
+import { Inter, Noto_Sans } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
+import "./globals.css";
 
 const inter = Inter({
   variable: "--font-inter",
+  subsets: ["latin"],
+});
+
+const fontMono = Noto_Sans({
+  variable: "--font-mono",
   subsets: ["latin"],
 });
 
@@ -21,16 +26,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <style>{`
-html {
-  font-family: ${inter.style.fontFamily};
-  --font-sans: ${inter.variable};
-}
-        `}</style>
-      </head>
-      <body>
+    <html lang="en" className={inter.className} suppressHydrationWarning>
+      <body className={`${fontMono.variable} antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

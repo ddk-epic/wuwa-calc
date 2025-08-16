@@ -1,14 +1,12 @@
 import { cn } from "@/lib/utils";
 import { Clock } from "lucide-react";
 import { totalBuffMap, totalBuffMapKeys } from "@/constants/constants";
-import { NextFontWithVariable } from "next/dist/compiled/@next/font";
 
 interface MatrixTableProps {
-  fontMono: NextFontWithVariable;
   data: number[][];
 }
 
-export default function MatrixTable({ fontMono, data }: MatrixTableProps) {
+export default function MatrixTable({ data }: MatrixTableProps) {
   const rowHeaders = totalBuffMap.map((_, index) => index + 1);
   const columnHeaders = totalBuffMapKeys;
 
@@ -26,7 +24,7 @@ export default function MatrixTable({ fontMono, data }: MatrixTableProps) {
 
   return (
     <div className="max-w-194 text-xs overflow-x-auto border rounded-sm">
-      <table className={`${fontMono.className} table-fixed w-full`}>
+      <table className="font-mono table-fixed w-full">
         <thead>
           <tr>
             <th className="w-8 border border-gray-300 bg-gray-100 py-0.5 px-2.5 font-semibold text-gray-700">
