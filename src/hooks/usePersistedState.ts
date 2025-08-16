@@ -8,7 +8,7 @@ export function usePersistedState<T>(key: string, initialValue: T) {
   useEffect(() => {
     const saved = getItem(key, initialValue);
     if (saved) setValue(saved);
-  }, [initialValue, key]);
+  }, []);
 
   useEffect(() => {
     setItem(key, value);
