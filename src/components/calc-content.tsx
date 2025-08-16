@@ -119,7 +119,7 @@ export default function CalculatorContent() {
           <div className="flex justify-between">
             <h3 className="font-semibold mb-3">Rotation Sequence</h3>
             <h3 className="font-semibold mb-3">
-              {team ? team[0] + "'s " : "no "}
+              {team[0] !== "" ? team[0] + "'s " : "no "}
               Team
             </h3>
           </div>
