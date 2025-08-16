@@ -18,6 +18,7 @@ import TimeMarkers from "./timeline/time-markers";
 import SelectCharacter from "./timeline/char-selection";
 import RotationSummary from "./timeline/summary";
 import MatrixTable from "./timeline/matrix-table";
+import { usePersistedState } from "@/hooks/usePersistedState";
 
 const FontMono = Noto_Sans({
   variable: "--font-roboto-mono",
@@ -26,7 +27,7 @@ const FontMono = Noto_Sans({
 
 export default function CalculatorContent() {
   const [openPopovers, setOpenPopovers] = useState<Record<string, boolean>>({});
-  const [characters, setCharacters] = useState(["", "", ""]);
+  const [team, setTeam] = usePersistedState("team", ["", "", ""]);
   const [skillSequence, setSkillSequence] = useState<SequenceSkill[]>([]);
 
   const currentSequenceTime = skillSequence.reduce(
@@ -82,9 +83,9 @@ export default function CalculatorContent() {
   };
 
   const handleCharacterChange = (index: number, value: string) => {
-    const updatedArr = [...characters];
-    updatedArr[index] = value.toLowerCase();
-    setCharacters(updatedArr);
+    const updatedArr = [...team];
+    updatedArr[index] = value;
+    setTeam(updatedArr);
   };
 
   return (
@@ -98,7 +99,7 @@ export default function CalculatorContent() {
           </p>
         </div>
         <div className="w-[510px] pt-2">
-          <SelectCharacter updateCharacters={handleCharacterChange} />
+          <SelectCharacter team={team} updateTeam={handleCharacterChange} />
         </div>
         <div className="justify-self-end pt-2.5">
           <Button
@@ -117,12 +118,10 @@ export default function CalculatorContent() {
         <CardContent className="px-6">
           <div className="flex justify-between">
             <h3 className="font-semibold mb-3">Rotation Sequence</h3>
-            {characters[0] && (
-              <h3 className="font-semibold mb-3">
-                {characters[0].charAt(0).toUpperCase() + characters[0].slice(1)}
-                &apos;s Team
-              </h3>
-            )}
+            <h3 className="font-semibold mb-3">
+              {team ? team[0] + "'s " : "no "}
+              Team
+            </h3>
           </div>
           <div>
             {/* Timeline Header */}
@@ -141,12 +140,12 @@ export default function CalculatorContent() {
           <div className={`flex w-full ${isScrollable ? "pb-0" : "pb-3"}`}>
             {/* Character Portraits */}
             <div className="mt-2 border-t rounded-none">
-              {characters.map((character, index) => (
+              {team.map((character, index) => (
                 <div
                   key={index}
                   className="w-8 h-12 flex justify-center items-center text-2xl font-bold border-b border-x"
                 >
-                  {character.charAt(0).toUpperCase()}
+                  {character.charAt(0)}
                 </div>
               ))}
             </div>
@@ -159,7 +158,7 @@ export default function CalculatorContent() {
             >
               {/* Timeline Bar */}
               <div className="pt-2 pb-1">
-                {characters.map((character, index) => (
+                {team.map((character, index) => (
                   <TimelineBar
                     key={index}
                     character={character}
@@ -179,7 +178,7 @@ export default function CalculatorContent() {
             </div>
             {/* Add Skill Button */}
             <div className="mt-2 border-t">
-              {characters.map((character, index) => (
+              {team.map((character, index) => (
                 <div key={index} className="h-12">
                   <Popover
                     open={openPopovers[character] || false}
@@ -200,12 +199,10 @@ export default function CalculatorContent() {
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent className="w-96 p-0">
-                      <h4 className="p-2 font-semibold text-sm">
-                        {character.charAt(0).toUpperCase() + character.slice(1)}
-                      </h4>
+                      <h4 className="p-2 font-semibold text-sm">{character}</h4>
                       <SelectSkill
                         fontMono={FontMono}
-                        skills={skillData[character]}
+                        skills={skillData[character.toLowerCase()]}
                         addSkill={addSkill}
                       />
                     </PopoverContent>
@@ -272,7 +269,7 @@ export default function CalculatorContent() {
                 </TabsList>
                 <TabsContent value="summary" className="px-1">
                   {/* Sequence Summary */}
-                  <RotationSummary characters={characters} />
+                  <RotationSummary characters={team} />
                 </TabsContent>
                 {/* Sequence Details */}
                 <TabsContent value="details" className="px-1">
