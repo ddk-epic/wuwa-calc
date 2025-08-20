@@ -19,6 +19,7 @@ import RotationSummary from "./timeline/summary";
 import MatrixTable from "./timeline/matrix-table";
 import { usePersistedState } from "@/hooks/usePersistedState";
 import { SequenceSkill, Skill } from "@/constants/types";
+import TimelineTable from "./timeline/timeline-table";
 
 export default function CalculatorContent() {
   const [openPopovers, setOpenPopovers] = useState<Record<string, boolean>>({});
@@ -27,6 +28,16 @@ export default function CalculatorContent() {
     "skills",
     []
   );
+
+  const damage = () => {
+    const skillDamage: number[] = [];
+    skillSequence.map((skill) => {
+      skillDamage.push(skill.damage);
+    });
+    return skillDamage;
+  };
+
+  const teamDamage = damage();
 
   const currentSequenceTime = skillSequence.reduce(
     (total, skill) => Math.max(total, skill.startTime + skill.castTime),
@@ -211,70 +222,42 @@ export default function CalculatorContent() {
         </CardContent>
       </Card>
 
-      <div className="grid grid-cols-[1fr_3fr] gap-6">
-        {/* Skill Sequence Column */}
+      <div className="grid grid-cols-[2fr_5fr] gap-6">
         {skillSequence.length > 0 && (
-          <Card>
-            <CardContent className="px-4 space-y-1">
-              <h3 className="font-semibold px-2 mb-4">Rotation</h3>
-              <div className="grid grid-cols-[4fr_1fr] w-full items-center px-2">
-                <h3 className="text-muted-foreground text-sm mb-1">Action</h3>
-                <h3 className="text-muted-foreground text-sm text-right mb-1">
-                  Time
-                </h3>
-              </div>
-              {skillSequence.map((skill, index) => (
-                <div
-                  key={`${skill.id}-${index}`}
-                  className={`${skill.bgColor} ${skill.textColor} rounded-sm flex items-center justify-between text-xs font-medium group cursor-pointer transition-all hover:brightness-110`}
-                >
-                  <div className="grid grid-cols-[4fr_1fr] w-full items-center py-1 px-2">
-                    <div
-                      title={`${skill.type}: ${skill.name}`}
-                      className="min-w-36 font-semibold truncate"
+          <>
+            {/* Left Tab */}
+            <TimelineTable skillSequence={skillSequence} />
+
+            {/* Right Tab */}
+            <Card>
+              <CardContent className="px-3">
+                <Tabs defaultValue="summary">
+                  <TabsList>
+                    <TabsTrigger
+                      value="summary"
+                      className="text-md font-semibold mb-4"
                     >
-                      {skill.type}: {skill.name}
-                    </div>
-                    <div className="text-right">
-                      <span className="font-mono">
-                        {skill.startTime.toFixed(2)}s
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </CardContent>
-          </Card>
-        )}
-        {skillSequence.length > 0 && (
-          <Card>
-            <CardContent className="px-3">
-              <Tabs defaultValue="summary">
-                <TabsList>
-                  <TabsTrigger
-                    value="summary"
-                    className="text-md font-semibold mb-4"
-                  >
-                    Summary
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="details"
-                    className="text-md font-semibold mb-4"
-                  >
-                    Details
-                  </TabsTrigger>
-                </TabsList>
-                <TabsContent value="summary" className="px-1">
-                  {/* Sequence Summary */}
-                  <RotationSummary team={team} />
-                </TabsContent>
-                {/* Sequence Details */}
-                <TabsContent value="details" className="px-1">
-                  <MatrixTable data={totalBuffMap} />
-                </TabsContent>
-              </Tabs>
-            </CardContent>
-          </Card>
+                      Summary
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="details"
+                      className="text-md font-semibold mb-4"
+                    >
+                      Details
+                    </TabsTrigger>
+                  </TabsList>
+                  <TabsContent value="summary" className="px-1">
+                    {/* Sequence Summary */}
+                    <RotationSummary team={team} damage={teamDamage} />
+                  </TabsContent>
+                  {/* Sequence Details */}
+                  <TabsContent value="details" className="px-1">
+                    <MatrixTable data={totalBuffMap} />
+                  </TabsContent>
+                </Tabs>
+              </CardContent>
+            </Card>
+          </>
         )}
       </div>
     </div>

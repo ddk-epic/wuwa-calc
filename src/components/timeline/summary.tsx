@@ -2,10 +2,11 @@ import React from "react";
 
 interface RotationSummaryProps {
   team: string[];
+  damage: number[];
 }
 
 export default function RotationSummary(props: RotationSummaryProps) {
-  const { team } = props;
+  const { team, damage } = props;
 
   const damageTypes = {
     "Total Damage": 215296,
@@ -88,6 +89,15 @@ export default function RotationSummary(props: RotationSummaryProps) {
             </React.Fragment>
           );
         })}
+      </div>
+      <div className="font-mono pt-6 text-sm">
+        {/* Damage */}
+        <span className="text-muted-foreground">Damage</span>
+        {damage.map((damage, index) => (
+          <div key={`damage-${index}`}>
+            <span className="font-mono font-medium">{damage}</span>
+          </div>
+        ))}
       </div>
     </div>
   );
