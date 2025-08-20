@@ -1,12 +1,15 @@
 import React from "react";
+import { calculateDamage } from "@/lib/calculations";
+import { SequenceSkill } from "@/constants/types";
+import { charData } from "@/constants/constants";
 
 interface RotationSummaryProps {
   team: string[];
-  damage: number[];
+  skillSequence: SequenceSkill[];
 }
 
 export default function RotationSummary(props: RotationSummaryProps) {
-  const { team, damage } = props;
+  const { team, skillSequence } = props;
 
   const damageTypes = {
     "Total Damage": 215296,
@@ -93,9 +96,11 @@ export default function RotationSummary(props: RotationSummaryProps) {
       <div className="font-mono pt-6 text-sm">
         {/* Damage */}
         <span className="text-muted-foreground">Damage</span>
-        {damage.map((damage, index) => (
+        {skillSequence.map((skill, index) => (
           <div key={`damage-${index}`}>
-            <span className="font-mono font-medium">{damage}</span>
+            <span className="font-mono font-medium">
+              {calculateDamage(skill.source, charData, skill).toFixed(2)}
+            </span>
           </div>
         ))}
       </div>

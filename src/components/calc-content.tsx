@@ -29,16 +29,6 @@ export default function CalculatorContent() {
     []
   );
 
-  const damage = () => {
-    const skillDamage: number[] = [];
-    skillSequence.map((skill) => {
-      skillDamage.push(skill.damage);
-    });
-    return skillDamage;
-  };
-
-  const teamDamage = damage();
-
   const currentSequenceTime = skillSequence.reduce(
     (total, skill) => Math.max(total, skill.startTime + skill.castTime),
     0
@@ -248,7 +238,10 @@ export default function CalculatorContent() {
                   </TabsList>
                   <TabsContent value="summary" className="px-1">
                     {/* Sequence Summary */}
-                    <RotationSummary team={team} damage={teamDamage} />
+                    <RotationSummary
+                      team={team}
+                      skillSequence={skillSequence}
+                    />
                   </TabsContent>
                   {/* Sequence Details */}
                   <TabsContent value="details" className="px-1">
