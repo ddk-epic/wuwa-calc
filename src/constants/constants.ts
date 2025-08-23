@@ -1,27 +1,39 @@
-import { camellya, sanhua, shorekeeper } from "./char-data";
+import { charStatData } from "./char-data";
 import {
   camellya_skills,
   sanhua_skills,
   shorekeeper_skills,
 } from "./skill-data";
-import { Skill, Character } from "./types";
+import { Skill, CharacterConstants, Weapon } from "./types";
+import { weapons } from "./weapon-data";
 
 export const characters: string[] = [
+  "none",
   "Encore",
   "Camellya",
   "Sanhua",
   "Shorekeeper",
 ];
+
+export const weaponData: Record<string, Weapon[]> = {
+  greatsword: weapons.filter((weapon) => weapon.type === "Greatsword"),
+  sword: weapons.filter((weapon) => weapon.type === "Sword"),
+  pistol: weapons.filter((weapon) => weapon.type === "Pistol"),
+  gauntlet: weapons.filter((weapon) => weapon.type === "Gauntlet"),
+  rectifier: weapons.filter((weapon) => weapon.type === "Rectifier"),
+};
+
 export const skillData: Record<string, Skill[]> = {
   camellya: camellya_skills,
   sanhua: sanhua_skills,
   shorekeeper: shorekeeper_skills,
 };
 
-export const charData: Record<string, Character> = {
-  camellya: camellya,
-  sanhua: sanhua,
-  shorekeeper: shorekeeper,
+export const charConstData: Record<string, CharacterConstants> = {
+  "none": charStatData["none"],
+  camellya: charStatData["camellya"],
+  sanhua: charStatData["sanhua"],
+  shorekeeper: charStatData["shorekeeper"],
 };
 
 export const totalBuffMapKeys = [

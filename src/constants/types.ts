@@ -50,6 +50,20 @@ export interface Echo {
   hasBuff: boolean;
 }
 
+export interface CharacterConstants {
+  name: string;
+  weapon: string;
+  baseHp: number;
+  baseAtk: number;
+  baseDef: number;
+  MinorForte1: string;
+  MinorForte2: string;
+  image: string;
+  element: string;
+  maxForte: number;
+  maxForte2: number;
+}
+
 export interface Character {
   name: string;
   sequenceChain: number;

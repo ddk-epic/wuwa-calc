@@ -1,6 +1,74 @@
 import { echoes } from "./echo-data";
 import { weapons } from "./weapon-data";
-import { Character } from "./types";
+import { Character, CharacterConstants } from "./types";
+
+export const charStatData: Record<string, CharacterConstants> = {
+  none: {
+    name: "none",
+    weapon: "",
+    baseHp: 100,
+    baseAtk: 10,
+    baseDef: 100,
+    MinorForte1: "",
+    MinorForte2: "",
+    image: "https://i.imgur.com/ymvvOeh.png",
+    element: "",
+    maxForte: 100,
+    maxForte2: 0,
+  },
+  encore: {
+    name: "Encore",
+    weapon: "Rectifier",
+    baseHp: 841,
+    baseAtk: 34,
+    baseDef: 102,
+    MinorForte1: "Attack",
+    MinorForte2: "Fusion",
+    image: "https://i.imgur.com/KUz0Psh.png",
+    element: "Fusion",
+    maxForte: 100,
+    maxForte2: 0,
+  },
+  sanhua: {
+    name: "Sanhua",
+    weapon: "Sword",
+    baseHp: 805,
+    baseAtk: 22,
+    baseDef: 77,
+    MinorForte1: "Attack",
+    MinorForte2: "Glacio",
+    image: "https://i.imgur.com/jpoAsFp.png",
+    element: "Glacio",
+    maxForte: 100,
+    maxForte2: 0,
+  },
+  shorekeeper: {
+    name: "Shorekeeper",
+    weapon: "Rectifier",
+    baseHp: 1337,
+    baseAtk: 23,
+    baseDef: 90,
+    MinorForte1: "Health",
+    MinorForte2: "Healing",
+    image: "https://i.imgur.com/iaR9PpA.png",
+    element: "Spectro",
+    maxForte: 5,
+    maxForte2: 0,
+  },
+  camellya: {
+    name: "Camellya",
+    weapon: "Sword",
+    baseHp: 826,
+    baseAtk: 36,
+    baseDef: 95,
+    MinorForte1: "Attack",
+    MinorForte2: "Crit Dmg",
+    image: "https://i.imgur.com/CpnmtcA.png",
+    element: "Havoc",
+    maxForte: 100,
+    maxForte2: 0,
+  },
+};
 
 export const camellya: Character = {
   name: "Camellya",
