@@ -10,6 +10,7 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 import { characters } from "@/constants/constants";
+import { CharacterConstants } from "@/constants/types";
 
 function CharacterSelectGroup() {
   return (
@@ -24,7 +25,7 @@ function CharacterSelectGroup() {
 }
 
 interface SelectCharacterProps {
-  team: string[];
+  team: CharacterConstants[];
   updateTeam: (index: number, value: string) => void;
 }
 
@@ -36,7 +37,11 @@ export default function SelectCharacter(props: SelectCharacterProps) {
     <div className="flex">
       <Select onValueChange={(value) => updateTeam(0, value)}>
         <SelectTrigger className="bg-gray-200 text-black border-gray-700 border-1 rounded-none focus:ring-0 focus:outline-none focus:ring-transparent">
-          <SelectValue placeholder={team[0] || placeholder[0]} />
+          <SelectValue
+            placeholder={
+              team[0].name !== "none" ? team[0].name : placeholder[0]
+            }
+          />
         </SelectTrigger>
         <SelectContent>
           <CharacterSelectGroup />
@@ -44,7 +49,11 @@ export default function SelectCharacter(props: SelectCharacterProps) {
       </Select>
       <Select onValueChange={(value) => updateTeam(1, value)}>
         <SelectTrigger className="rounded-none focus:ring-0 focus:outline-none focus:ring-transparent">
-          <SelectValue placeholder={team[1] || placeholder[1]} />
+          <SelectValue
+            placeholder={
+              team[1].name !== "none" ? team[1].name : placeholder[1]
+            }
+          />
         </SelectTrigger>
         <SelectContent>
           <CharacterSelectGroup />
@@ -52,7 +61,11 @@ export default function SelectCharacter(props: SelectCharacterProps) {
       </Select>
       <Select onValueChange={(value) => updateTeam(2, value)}>
         <SelectTrigger className="rounded-none focus:ring-0 focus:outline-none focus:ring-transparent">
-          <SelectValue placeholder={team[2] || placeholder[2]} />
+          <SelectValue
+            placeholder={
+              team[2].name !== "none" ? team[2].name : placeholder[2]
+            }
+          />
         </SelectTrigger>
         <SelectContent>
           <CharacterSelectGroup />

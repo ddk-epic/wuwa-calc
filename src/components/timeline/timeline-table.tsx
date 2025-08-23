@@ -37,7 +37,7 @@ export default function TimelineTable({ skillSequence }: TimelineTableProps) {
               >
                 {skill.type}: {skill.name}
               </div>
-              <div className="font-mono bg-gray-600 rounded-xs basis-2/12 py-1 pr-1 text-right">
+              <div className="font-mono bg-gray-500 rounded-xs basis-2/12 py-1 pr-1 text-right">
                 {skill.startTime.toFixed(2)}s
               </div>
               <div className="font-mono bg-gray-600 rounded-xs basis-1/12 p-1 text-right">

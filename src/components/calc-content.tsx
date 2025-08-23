@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -18,12 +19,19 @@ import SelectCharacter from "./timeline/char-selection";
 import RotationSummary from "./timeline/summary";
 import MatrixTable from "./timeline/matrix-table";
 import { usePersistedState } from "@/hooks/usePersistedState";
-import { SequenceSkill, Skill } from "@/constants/types";
+import { CharacterConstants, SequenceSkill, Skill } from "@/constants/types";
 import TimelineTable from "./timeline/timeline-table";
+import CharStats from "./timeline/char-stats";
+import { charStatData } from "@/constants/char-data";
 
 export default function CalculatorContent() {
   const [openPopovers, setOpenPopovers] = useState<Record<string, boolean>>({});
-  const [team, setTeam] = usePersistedState("team", ["", "", ""]);
+  const [team, setTeam] = usePersistedState<CharacterConstants[]>("team", [
+    charStatData["none"],
+    charStatData["none"],
+    charStatData["none"],
+  ]);
+  const [charData, setCharData] = usePersistedState("charData", []);
   const [skillSequence, setSkillSequence] = usePersistedState<SequenceSkill[]>(
     "skills",
     []
@@ -83,7 +91,7 @@ export default function CalculatorContent() {
 
   const handleCharacterChange = (index: number, value: string) => {
     const updatedArr = [...team];
-    updatedArr[index] = value;
+    updatedArr[index] = charStatData[value.toLowerCase()];
     setTeam(updatedArr);
   };
 
@@ -111,14 +119,16 @@ export default function CalculatorContent() {
         </div>
       </div>
 
-      {/* Timeline Container */}
+      {/* Stats Accordion */}
+      <CharStats team={team} />
 
+      {/* Timeline Container */}
       <Card>
         <CardContent className="px-6">
           <div className="flex justify-between">
             <h3 className="font-semibold mb-3">Rotation Sequence</h3>
             <h3 className="font-semibold mb-3">
-              {team[0] !== "" ? team[0] + "'s " : "no "}
+              {team[0].name !== "none" ? team[0].name + "'s " : "no "}
               Team
             </h3>
           </div>
@@ -142,9 +152,20 @@ export default function CalculatorContent() {
               {team.map((character, index) => (
                 <div
                   key={index}
-                  className="w-8 h-12 flex justify-center items-center text-2xl font-bold border-b border-x"
+                  className="relative size-12 flex justify-center items-center text-2xl font-bold border-b border-x"
                 >
-                  {character.charAt(0)}
+                  {charStatData[character.name.toLowerCase()] && (
+                    <Image
+                      src={charStatData[character.name.toLowerCase()].image}
+                      alt={`${character} image`}
+                      width={120}
+                      height={120}
+                      style={{
+                        objectFit: "cover",
+                        transform: "scale(1.05)",
+                      }}
+                    />
+                  )}
                 </div>
               ))}
             </div>
@@ -180,11 +201,11 @@ export default function CalculatorContent() {
               {team.map((character, index) => (
                 <div key={index} className="h-12">
                   <Popover
-                    open={openPopovers[character] || false}
+                    open={openPopovers[character.name] || false}
                     onOpenChange={(open) =>
                       setOpenPopovers((prev) => ({
                         ...prev,
-                        [character]: open,
+                        [character.name]: open,
                       }))
                     }
                   >
@@ -192,15 +213,17 @@ export default function CalculatorContent() {
                       <Button
                         variant="secondary"
                         className="w-8 h-12 border-b border-x rounded-none hover:bg-background"
-                        disabled={character === ""}
+                        disabled={character.name === "none"}
                       >
                         <Plus className="w-4 h-4" />
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent className="w-96 p-0">
-                      <h4 className="p-2 font-semibold text-sm">{character}</h4>
+                      <h4 className="p-2 font-semibold text-sm">
+                        {character.name}
+                      </h4>
                       <SelectSkill
-                        skills={skillData[character.toLowerCase()]}
+                        skills={skillData[character.name.toLowerCase()]}
                         addSkill={addSkill}
                       />
                     </PopoverContent>

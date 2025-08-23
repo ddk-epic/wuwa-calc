@@ -2,10 +2,10 @@
 
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { SequenceSkill } from "@/constants/types";
+import { CharacterConstants, SequenceSkill } from "@/constants/types";
 
 interface TimelineBarProps {
-  character: string;
+  character: CharacterConstants;
   skillSequence: SequenceSkill[];
   timelineWidth: number;
   maxSequenceTime: number;
@@ -36,7 +36,7 @@ export default function TimelineBar(props: TimelineBarProps) {
       {skillSequence.length > 0 && (
         <div className="relative h-12 bg-muted/20 border border-muted/30 rounded-lg">
           {skillSequence.map((skill, index) => {
-            if (character.toLowerCase() === skill.source)
+            if (character.name.toLowerCase() === skill.source)
               return (
                 <div
                   key={`${skill.id}-${index}`}
