@@ -1,10 +1,10 @@
-import { charStatData } from "./char-data";
+import { camellya, sanhua, shorekeeper } from "./char-data";
 import {
   camellya_skills,
   sanhua_skills,
   shorekeeper_skills,
 } from "./skill-data";
-import { Skill, CharacterConstants, Weapon } from "./types";
+import { Skill, Weapon, Character } from "./types";
 import { weapons } from "./weapon-data";
 
 export const characters: string[] = [
@@ -28,12 +28,18 @@ export const skillData: Record<string, Skill[]> = {
   shorekeeper: shorekeeper_skills,
 };
 
-export const charConstData: Record<string, CharacterConstants> = {
-  "none": charStatData["none"],
-  camellya: charStatData["camellya"],
-  sanhua: charStatData["sanhua"],
-  shorekeeper: charStatData["shorekeeper"],
+export const charConstData: Record<string, Character> = {
+  camellya: camellya,
+  sanhua: sanhua,
+  shorekeeper: shorekeeper,
 };
+
+export const builds = [
+  "43311 Ele/Ele",
+  "43311 Ele/Atk",
+  "43311 Ele/ER",
+  "44111 crit/cDMG",
+];
 
 export const totalBuffMapKeys = [
   "Atk%",
