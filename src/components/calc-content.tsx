@@ -104,7 +104,7 @@ export default function CalculatorContent() {
     setSkillSequence(recalculatedSequence);
   };
 
-  const handleCharacterChange = (index: number, character: string) => {
+  const handleSelectTeam = (index: number, character: string) => {
     const updatedArr = [...team];
     updatedArr[index] = charStatData[character.toLowerCase()];
     setTeam(updatedArr);
@@ -162,7 +162,7 @@ export default function CalculatorContent() {
           </p>
         </div>
         <div className="w-[510px] pt-2">
-          <SelectCharacter team={team} updateTeam={handleCharacterChange} />
+          <SelectCharacter team={team} updateTeam={handleSelectTeam} />
         </div>
         <div className="justify-self-end pt-2.5">
           <Button

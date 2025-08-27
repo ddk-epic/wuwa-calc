@@ -32,30 +32,37 @@ interface SelectCharacterProps {
 export default function SelectCharacter(props: SelectCharacterProps) {
   const { team, updateTeam } = props;
   const placeholder = ["DPS", "Slot 2", "Slot 3"];
-  const displayPlaceholder = (i: number) =>
-    team[i].name !== "none" ? team[i].name : placeholder[i];
 
   return (
     <div className="flex">
-      <Select onValueChange={(value) => updateTeam(0, value)}>
+      <Select
+        value={team[0]?.name}
+        onValueChange={(value) => updateTeam(0, value)}
+      >
         <SelectTrigger className="bg-gray-200 text-black border-gray-700 border-1 rounded-none focus:ring-0 focus:outline-none focus:ring-transparent">
-          <SelectValue placeholder={displayPlaceholder(0)} />
+          <SelectValue placeholder={placeholder[0]} />
         </SelectTrigger>
         <SelectContent>
           <CharacterSelectGroup />
         </SelectContent>
       </Select>
-      <Select onValueChange={(value) => updateTeam(1, value)}>
+      <Select
+        value={team[1]?.name}
+        onValueChange={(value) => updateTeam(1, value)}
+      >
         <SelectTrigger className="rounded-none focus:ring-0 focus:outline-none focus:ring-transparent">
-          <SelectValue placeholder={displayPlaceholder(1)} />
+          <SelectValue placeholder={placeholder[1]} />
         </SelectTrigger>
         <SelectContent>
           <CharacterSelectGroup />
         </SelectContent>
       </Select>
-      <Select onValueChange={(value) => updateTeam(2, value)}>
+      <Select
+        value={team[2]?.name}
+        onValueChange={(value) => updateTeam(2, value)}
+      >
         <SelectTrigger className="rounded-none focus:ring-0 focus:outline-none focus:ring-transparent">
-          <SelectValue placeholder={displayPlaceholder(2)} />
+          <SelectValue placeholder={placeholder[2]} />
         </SelectTrigger>
         <SelectContent>
           <CharacterSelectGroup />
