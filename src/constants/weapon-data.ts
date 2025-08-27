@@ -4,7 +4,6 @@ export const weapons: Weapon[] = [
   {
     name: "Stringmaster (5☆)",
     type: "Rectifier",
-    rank: 1,
     attack: 40,
     mainStat: "Crit",
     mainStatAmount: 0.08,
@@ -13,7 +12,6 @@ export const weapons: Weapon[] = [
   {
     name: "Stellar Symphony (5☆)",
     type: "Rectifier",
-    rank: 1,
     attack: 33,
     mainStat: "Energy Regen",
     mainStatAmount: 0.1712,
@@ -22,7 +20,6 @@ export const weapons: Weapon[] = [
   {
     name: "Blazing Brilliance (5☆)",
     type: "Sword",
-    rank: 1,
     attack: 47,
     mainStat: "Crit Dmg",
     mainStatAmount: 0.108,
@@ -31,7 +28,6 @@ export const weapons: Weapon[] = [
   {
     name: "Red Spring (5☆)",
     type: "Sword",
-    rank: 1,
     attack: 47,
     mainStat: "Crit",
     mainStatAmount: 0.054,
@@ -40,7 +36,6 @@ export const weapons: Weapon[] = [
   {
     name: "Emerald of Genesis (5☆)",
     type: "Sword",
-    rank: 1,
     attack: 47,
     mainStat: "Crit",
     mainStatAmount: 0.054,
