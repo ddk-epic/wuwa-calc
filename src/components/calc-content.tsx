@@ -19,19 +19,36 @@ import SelectCharacter from "./timeline/char-selection";
 import RotationSummary from "./timeline/summary";
 import MatrixTable from "./timeline/matrix-table";
 import { usePersistedState } from "@/hooks/usePersistedState";
-import { CharacterConstants, SequenceSkill, Skill } from "@/constants/types";
+import {
+  Character,
+  CharacterConstants,
+  SequenceSkill,
+  Skill,
+} from "@/constants/types";
 import TimelineTable from "./timeline/timeline-table";
 import CharStats from "./timeline/char-stats";
 import { charStatData } from "@/constants/char-data";
+import { weapons } from "@/constants/weapon-data";
+import { echoes } from "@/constants/echo-data";
+
+const initialTeam = [
+  charStatData["none"],
+  charStatData["none"],
+  charStatData["none"],
+];
+
+const initialCharData = {};
 
 export default function CalculatorContent() {
   const [openPopovers, setOpenPopovers] = useState<Record<string, boolean>>({});
-  const [team, setTeam] = usePersistedState<CharacterConstants[]>("team", [
-    charStatData["none"],
-    charStatData["none"],
-    charStatData["none"],
-  ]);
-  const [charData, setCharData] = usePersistedState("charData", []);
+  const [team, setTeam] = usePersistedState<CharacterConstants[]>(
+    "team",
+    initialTeam
+  );
+  const [charData, setCharData] = usePersistedState<Record<string, Character>>(
+    "charData",
+    initialCharData
+  );
   const [skillSequence, setSkillSequence] = usePersistedState<SequenceSkill[]>(
     "skills",
     []
@@ -55,18 +72,16 @@ export default function CalculatorContent() {
   }, [isScrollable]);
 
   const addSkill = (skill: Skill) => {
-    const startTime =
-      skillSequence.length > 0
-        ? Math.max(...skillSequence.map((s) => s.startTime + s.castTime))
-        : 0;
+    const lastSkill = skillSequence[skillSequence.length - 1];
+
+    const startTime = lastSkill ? lastSkill.startTime + lastSkill.castTime : 0;
 
     const newSkill: SequenceSkill = {
       ...skill,
       startTime,
     };
-    const newSequence = [...skillSequence, newSkill];
 
-    setSkillSequence(newSequence);
+    setSkillSequence([...skillSequence, newSkill]);
   };
 
   const removeSkill = (index: number) => {
@@ -89,10 +104,51 @@ export default function CalculatorContent() {
     setSkillSequence(recalculatedSequence);
   };
 
-  const handleCharacterChange = (index: number, value: string) => {
+  const handleCharacterChange = (index: number, character: string) => {
     const updatedArr = [...team];
-    updatedArr[index] = charStatData[value.toLowerCase()];
+    updatedArr[index] = charStatData[character.toLowerCase()];
     setTeam(updatedArr);
+  };
+
+  const updateCharData = (
+    character: string,
+    key: keyof Character,
+    value: string | number
+  ) => {
+    const updatedCharacter = { ...charData[character], [key]: value };
+    setCharData({ ...charData, [character]: updatedCharacter });
+  };
+
+  const updateWeaponData = (
+    character: string,
+    key: keyof Character,
+    value: string
+  ) => {
+    const getWeapon =
+      key === "weapon"
+        ? weapons.find((weapon) => weapon.name === value)
+        : undefined;
+    const updatedCharacter = { ...charData[character], [key]: getWeapon };
+    setCharData({ ...charData, [character]: updatedCharacter });
+  };
+
+  const updateEchoData = (
+    character: string,
+    key: keyof Character,
+    value: string
+  ) => {
+    const getEcho =
+      key === "echo" ? echoes.find((echo) => echo.name === value) : undefined;
+    const updatedCharacter = {
+      ...charData[character],
+      [key]: getEcho,
+    };
+    setCharData({ ...charData, [character]: updatedCharacter });
+  };
+
+  const clear = () => {
+    setSkillSequence([]);
+    setCharData({});
   };
 
   return (
@@ -111,7 +167,7 @@ export default function CalculatorContent() {
         <div className="justify-self-end pt-2.5">
           <Button
             variant="outline"
-            onClick={() => setSkillSequence([])} // clear
+            onClick={clear}
             disabled={skillSequence.length === 0}
           >
             Clear All
@@ -120,7 +176,13 @@ export default function CalculatorContent() {
       </div>
 
       {/* Stats Accordion */}
-      <CharStats team={team} />
+      <CharStats
+        team={team}
+        charData={charData}
+        updateCharData={updateCharData}
+        updateWeaponData={updateWeaponData}
+        updateEchoData={updateEchoData}
+      />
 
       {/* Timeline Container */}
       <Card>

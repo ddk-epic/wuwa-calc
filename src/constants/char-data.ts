@@ -72,9 +72,11 @@ export const charStatData: Record<string, CharacterConstants> = {
 
 export const camellya: Character = {
   name: "Camellya",
-  sequenceChain: 0,
+  sequence: "0",
   weapon: weapons.find((weapon) => weapon.name.includes("Red Spring"))!,
+  weaponRank: "1",
   echo: echoes.find((echo) => echo.name.includes("Nightmare: Crownless"))!,
+  echoSet: "",
   build: "43311 Ele/Ele",
   element: "Havoc",
   maxForte: 100,
@@ -88,9 +90,11 @@ export const camellya: Character = {
 
 export const sanhua: Character = {
   name: "Sanhua",
-  sequenceChain: 0,
+  sequence: "0",
   weapon: weapons.find((weapon) => weapon.name.includes("Emerald of Genesis"))!,
+  weaponRank: "1",
   echo: echoes.find((echo) => echo.name.includes("Impermanence Heron"))!,
+  echoSet: "",
   build: "43311 Ele/Ele",
   element: "Glacio",
   maxForte: 100,
@@ -104,9 +108,11 @@ export const sanhua: Character = {
 
 export const shorekeeper: Character = {
   name: "Shorekeeper",
-  sequenceChain: 0,
+  sequence: "0",
   weapon: weapons.find((weapon) => weapon.name.includes("Stellar Symphony"))!,
+  weaponRank: "1",
   echo: echoes.find((echo) => echo.name.includes("Fallacy of No Return"))!,
+  echoSet: "",
   build: "43311 Ele/ER",
   element: "Spectro",
   maxForte: 5,

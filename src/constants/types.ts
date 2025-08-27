@@ -30,7 +30,6 @@ export interface SequenceSkill extends Skill {
 export interface Weapon {
   name: string;
   type: string;
-  rank: number;
   attack: number;
   mainStat: string;
   mainStatAmount: number;
@@ -66,9 +65,11 @@ export interface CharacterConstants {
 
 export interface Character {
   name: string;
-  sequenceChain: number;
+  sequence: string;
   weapon: Weapon;
+  weaponRank: string;
   echo: Echo;
+  echoSet: string;
   build: string;
   element: string;
   maxForte: number;
