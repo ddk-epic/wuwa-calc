@@ -31,19 +31,13 @@ import { charStatData } from "@/constants/char-data";
 import { weapons } from "@/constants/weapon-data";
 import { echoes } from "@/constants/echo-data";
 
-const initialTeam = [
-  charStatData["none"],
-  charStatData["none"],
-  charStatData["none"],
-];
-
 const initialCharData = {};
 
 export default function CalculatorContent() {
   const [openPopovers, setOpenPopovers] = useState<Record<string, boolean>>({});
-  const [team, setTeam] = usePersistedState<CharacterConstants[]>(
+  const [team, setTeam] = usePersistedState<(null | CharacterConstants)[]>(
     "team",
-    initialTeam
+    [null, null, null]
   );
   const [charData, setCharData] = usePersistedState<Record<string, Character>>(
     "charData",
@@ -190,7 +184,7 @@ export default function CalculatorContent() {
           <div className="flex justify-between">
             <h3 className="font-semibold mb-3">Rotation Sequence</h3>
             <h3 className="font-semibold mb-3">
-              {team[0].name !== "none" ? team[0].name + "'s " : "no "}
+              {team[0]?.name ? team[0].name + "'s " : "no "}
               Team
             </h3>
           </div>
@@ -216,7 +210,7 @@ export default function CalculatorContent() {
                   key={index}
                   className="relative size-12 flex justify-center items-center text-2xl font-bold border-b border-x"
                 >
-                  {charStatData[character.name.toLowerCase()] && (
+                  {character && charStatData[character.name.toLowerCase()] && (
                     <Image
                       src={charStatData[character.name.toLowerCase()].image}
                       alt={`${character} image`}
@@ -260,38 +254,41 @@ export default function CalculatorContent() {
             </div>
             {/* Add Skill Button */}
             <div className="mt-2 border-t">
-              {team.map((character, index) => (
-                <div key={index} className="h-12">
-                  <Popover
-                    open={openPopovers[character.name] || false}
-                    onOpenChange={(open) =>
-                      setOpenPopovers((prev) => ({
-                        ...prev,
-                        [character.name]: open,
-                      }))
-                    }
-                  >
-                    <PopoverTrigger asChild>
-                      <Button
-                        variant="secondary"
-                        className="w-8 h-12 border-b border-x rounded-none hover:bg-background"
-                        disabled={character.name === "none"}
+              {team.map(
+                (character, index) =>
+                  character && (
+                    <div key={index} className="h-12">
+                      <Popover
+                        open={openPopovers[character.name] || false}
+                        onOpenChange={(open) =>
+                          setOpenPopovers((prev) => ({
+                            ...prev,
+                            [character.name]: open,
+                          }))
+                        }
                       >
-                        <Plus className="w-4 h-4" />
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-96 p-0">
-                      <h4 className="p-2 font-semibold text-sm">
-                        {character.name}
-                      </h4>
-                      <SelectSkill
-                        skills={skillData[character.name.toLowerCase()]}
-                        addSkill={addSkill}
-                      />
-                    </PopoverContent>
-                  </Popover>
-                </div>
-              ))}
+                        <PopoverTrigger asChild>
+                          <Button
+                            variant="secondary"
+                            className="w-8 h-12 border-b border-x rounded-none hover:bg-background"
+                            disabled={character.name === "none"}
+                          >
+                            <Plus className="w-4 h-4" />
+                          </Button>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-96 p-0">
+                          <h4 className="p-2 font-semibold text-sm">
+                            {character.name}
+                          </h4>
+                          <SelectSkill
+                            skills={skillData[character.name.toLowerCase()]}
+                            addSkill={addSkill}
+                          />
+                        </PopoverContent>
+                      </Popover>
+                    </div>
+                  )
+              )}
             </div>
           </div>
         </CardContent>

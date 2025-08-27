@@ -3,19 +3,6 @@ import { weapons } from "./weapon-data";
 import { Character, CharacterConstants } from "./types";
 
 export const charStatData: Record<string, CharacterConstants> = {
-  none: {
-    name: "none",
-    weapon: "",
-    baseHp: 100,
-    baseAtk: 10,
-    baseDef: 100,
-    MinorForte1: "",
-    MinorForte2: "",
-    image: "https://i.imgur.com/ymvvOeh.png",
-    element: "",
-    maxForte: 100,
-    maxForte2: 0,
-  },
   encore: {
     name: "Encore",
     weapon: "Rectifier",

@@ -8,7 +8,6 @@ import { Skill, CharacterConstants, Weapon } from "./types";
 import { weapons } from "./weapon-data";
 
 export const characters: string[] = [
-  "none",
   "Encore",
   "Camellya",
   "Sanhua",

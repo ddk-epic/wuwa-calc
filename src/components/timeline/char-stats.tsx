@@ -97,7 +97,7 @@ function EchoSetSelectGroup() {
 }
 
 interface CharStatsProps {
-  team: CharacterConstants[];
+  team: (null | CharacterConstants)[];
   charData: Record<string, Character>;
   updateCharData: (
     character: string,
@@ -125,11 +125,11 @@ function CharStatsForm(props: CharStatsProps) {
       <div className="space-y-3">
         {team.map(
           (character, i) =>
-            character.name !== "N/A" && (
+            character && (
               <div key={`character-${i}`} className="h-21 flex space-x-1">
                 {charStatData[character.name.toLowerCase()] && (
                   <Image
-                    src={charStatData[character.name.toLowerCase()].image}
+                    src={charStatData[character?.name.toLowerCase()].image}
                     alt={`${character} image`}
                     width={105}
                     height={105}
@@ -144,7 +144,7 @@ function CharStatsForm(props: CharStatsProps) {
                         onValueChange={(value) =>
                           updateCharData(character.name, "build", value)
                         }
-                        disabled={team[i].name === "none"}
+                        disabled={team[i]?.name === null}
                       >
                         <SelectTrigger className="min-w-56 text-xs rounded-none focus:ring-0 focus:outline-none focus:ring-transparent">
                           <SelectValue placeholder={"Build"} />
@@ -158,9 +158,9 @@ function CharStatsForm(props: CharStatsProps) {
                     <div>
                       <Select
                         onValueChange={(value) =>
-                          updateCharData(character.name, "sequence", value)
+                          updateCharData(character?.name, "sequence", value)
                         }
-                        disabled={team[i].name === "none"}
+                        disabled={team[i]?.name === null}
                       >
                         <SelectTrigger className="min-w-13 text-xs rounded-none focus:ring-0 focus:outline-none focus:ring-transparent">
                           <SelectValue placeholder={"S"} />
@@ -174,9 +174,9 @@ function CharStatsForm(props: CharStatsProps) {
                     <div>
                       <Select
                         onValueChange={(value) =>
-                          updateEchoData(character.name, "echo", value)
+                          updateEchoData(character?.name, "echo", value)
                         }
-                        disabled={team[i].name === "none"}
+                        disabled={team[i]?.name === null}
                       >
                         <SelectTrigger className="min-w-52 text-xs rounded-none focus:ring-0 focus:outline-none focus:ring-transparent">
                           <SelectValue placeholder={"Echo"} />
@@ -192,9 +192,9 @@ function CharStatsForm(props: CharStatsProps) {
                     <div>
                       <Select
                         onValueChange={(value) =>
-                          updateWeaponData(character.name, "weapon", value)
+                          updateWeaponData(character?.name, "weapon", value)
                         }
-                        disabled={team[i].name === "none"}
+                        disabled={team[i]?.name === null}
                       >
                         <SelectTrigger className="min-w-56 text-xs rounded-none focus:ring-0 focus:outline-none focus:ring-transparent">
                           <SelectValue placeholder={"Weapon"} />
@@ -208,9 +208,9 @@ function CharStatsForm(props: CharStatsProps) {
                     <div>
                       <Select
                         onValueChange={(value) =>
-                          updateCharData(character.name, "weaponRank", value)
+                          updateCharData(character?.name, "weaponRank", value)
                         }
-                        disabled={team[i].name === "none"}
+                        disabled={team[i]?.name === null}
                       >
                         <SelectTrigger className="min-w-13 text-xs rounded-none focus:ring-0 focus:outline-none focus:ring-transparent">
                           <SelectValue placeholder={"R"} />
@@ -224,9 +224,9 @@ function CharStatsForm(props: CharStatsProps) {
                     <div>
                       <Select
                         onValueChange={(value) =>
-                          updateCharData(character.name, "echoSet", value)
+                          updateCharData(character?.name, "echoSet", value)
                         }
-                        disabled={team[i].name === "none"}
+                        disabled={team[i]?.name === null}
                       >
                         <SelectTrigger className="min-w-52 text-xs rounded-none focus:ring-0 focus:outline-none focus:ring-transparent">
                           <SelectValue

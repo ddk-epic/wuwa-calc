@@ -3,7 +3,7 @@ import { calculateDamage } from "@/lib/calculations";
 import { CharacterConstants, SequenceSkill } from "@/constants/types";
 
 interface RotationSummaryProps {
-  team: CharacterConstants[];
+  team: (null | CharacterConstants)[];
   skillSequence: SequenceSkill[];
 }
 
@@ -23,9 +23,9 @@ export default function RotationSummary(props: RotationSummaryProps) {
   const rowHeaders = [
     "Damage Breakdown",
     "Total",
-    team[0].name,
-    team[1].name,
-    team[2].name,
+    team[0]?.name,
+    team[1]?.name,
+    team[2]?.name,
   ];
 
   const damageBreakdown = {

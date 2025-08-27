@@ -25,7 +25,7 @@ function CharacterSelectGroup() {
 }
 
 interface SelectCharacterProps {
-  team: CharacterConstants[];
+  team: (null | CharacterConstants)[];
   updateTeam: (index: number, value: string) => void;
 }
 
