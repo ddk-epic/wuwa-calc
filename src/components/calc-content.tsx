@@ -111,7 +111,7 @@ export default function CalculatorContent() {
     key: keyof Character,
     value: string | number
   ) => {
-    let updatedValue: any = value;
+    let updatedValue: Character[keyof Character] | undefined = value;
 
     if (key === "weapon") {
       updatedValue = weapons[value];
