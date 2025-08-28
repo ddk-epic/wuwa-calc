@@ -97,9 +97,9 @@ export default function CalculatorContent() {
   };
 
   const handleSelectTeam = (index: number, characterId: string) => {
-    const updatedArr = [...team];
-    updatedArr[index] = charStatData[characterId];
-    setTeam(updatedArr);
+    const updatedTeam = [...team];
+    updatedTeam[index] = charStatData[characterId];
+    setTeam(updatedTeam);
     setCharData({
       ...charData,
       [characterId]: charConstData[characterId],

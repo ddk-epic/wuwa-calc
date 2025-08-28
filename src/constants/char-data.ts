@@ -32,7 +32,6 @@ export const charStatData: Record<string, CharacterConstants> = {
     maxForte2: 0,
   },
   sanhua: {
-    
     id: "sanhua",
     name: "Sanhua",
     weapon: "Sword",
@@ -65,7 +64,7 @@ export const charStatData: Record<string, CharacterConstants> = {
 export const camellya: Character = {
   name: "Camellya",
   sequence: "0",
-  weapon: weapons["Red Spring"],
+  weapon: weapons["Red Spring (5☆)"],
   weaponRank: "1",
   echo: echoes["Nightmare: Crownless"],
   echoSet: "Havoc Eclipse",
@@ -83,7 +82,7 @@ export const camellya: Character = {
 export const sanhua: Character = {
   name: "Sanhua",
   sequence: "0",
-  weapon: weapons["Emerald of Genesis"],
+  weapon: weapons["Emerald of Genesis (5☆)"],
   weaponRank: "1",
   echo: echoes["Impermanence Heron"],
   echoSet: "Moonlit Clouds",
@@ -101,7 +100,7 @@ export const sanhua: Character = {
 export const shorekeeper: Character = {
   name: "Shorekeeper",
   sequence: "0",
-  weapon: weapons["Stellar Symphony"],
+  weapon: weapons["Stellar Symphony (5☆)"],
   weaponRank: "1",
   echo: echoes["Fallacy of No Return"],
   echoSet: "Rejuvenating Glow",

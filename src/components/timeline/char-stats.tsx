@@ -162,7 +162,7 @@ function CharStatsForm(props: CharStatsProps) {
                   {/* Echo */}
                   <div>
                     <Select
-                      value={charData[character.id]?.echo.name}
+                      value={charData[character.id]?.echo?.name}
                       onValueChange={(value) =>
                         updateCharacterData(character.id, "echo", value)
                       }
@@ -181,7 +181,7 @@ function CharStatsForm(props: CharStatsProps) {
                   {/* Weapon */}
                   <div>
                     <Select
-                      value={charData[character.id]?.weapon.name}
+                      value={charData[character.id]?.weapon?.name}
                       onValueChange={(value) =>
                         updateCharacterData(character.id, "weapon", value)
                       }
