@@ -15,9 +15,9 @@ import { charStatData } from "@/constants/char-data";
 function CharacterSelectGroup() {
   return (
     <SelectGroup>
-      {Object.entries(charStatData).map(([character, charData]) => (
-        <SelectItem key={character} value={charData.id}>
-          {charData.name}
+      {Object.values(charStatData).map((character) => (
+        <SelectItem key={character.id} value={character.id}>
+          {character.name}
         </SelectItem>
       ))}
     </SelectGroup>
