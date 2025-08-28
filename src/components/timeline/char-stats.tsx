@@ -73,7 +73,7 @@ function RankSelectGroup() {
 function EchoSelectGroup() {
   return (
     <SelectGroup>
-      {echoes.map((echo) => (
+      {Object.values(echoes).map((echo) => (
         <SelectItem key={echo.name} value={echo.name}>
           {echo.name}
         </SelectItem>
@@ -85,7 +85,7 @@ function EchoSelectGroup() {
 function EchoSetSelectGroup() {
   return (
     <SelectGroup>
-      {echoes.map((echo) => (
+      {Object.values(echoes).map((echo) => (
         <SelectItem key={echo.set} value={echo.set}>
           {echo.set}
         </SelectItem>
@@ -97,25 +97,15 @@ function EchoSetSelectGroup() {
 interface CharStatsProps {
   team: (null | CharacterConstants)[];
   charData: Record<string, Character>;
-  updateCharData: (
+  updateCharacterData: (
     character: string,
     key: keyof Character,
     value: string | number
   ) => void;
-  updateWeaponData: (
-    character: string,
-    key: keyof Character,
-    weaponRank: string
-  ) => void;
-  updateEchoData: (
-    character: string,
-    key: keyof Character,
-    value: string
-  ) => void;
 }
 
 function CharStatsForm(props: CharStatsProps) {
-  const { team, charData, updateCharData, updateWeaponData, updateEchoData } =
+  const { team, charData, updateCharacterData } =
     props;
   return (
     <div className="flex text-xs">
@@ -140,7 +130,7 @@ function CharStatsForm(props: CharStatsProps) {
                     <Select
                       value={charData[character.id]?.build}
                       onValueChange={(value) =>
-                        updateCharData(character.name, "build", value)
+                        updateCharacterData(character.id, "build", value)
                       }
                       disabled={team[i]?.name === null}
                     >
@@ -157,7 +147,7 @@ function CharStatsForm(props: CharStatsProps) {
                     <Select
                       value={charData[character.id]?.sequence}
                       onValueChange={(value) =>
-                        updateCharData(character.name, "sequence", value)
+                        updateCharacterData(character.id, "sequence", value)
                       }
                       disabled={team[i]?.name === null}
                     >
@@ -174,7 +164,7 @@ function CharStatsForm(props: CharStatsProps) {
                     <Select
                       value={charData[character.id]?.echo.name}
                       onValueChange={(value) =>
-                        updateEchoData(character.name, "echo", value)
+                        updateCharacterData(character.id, "echo", value)
                       }
                       disabled={team[i]?.name === null}
                     >
@@ -193,7 +183,7 @@ function CharStatsForm(props: CharStatsProps) {
                     <Select
                       value={charData[character.id]?.weapon.name}
                       onValueChange={(value) =>
-                        updateWeaponData(character.name, "weapon", value)
+                        updateCharacterData(character.id, "weapon", value)
                       }
                       disabled={team[i]?.name === null}
                     >
@@ -210,7 +200,7 @@ function CharStatsForm(props: CharStatsProps) {
                     <Select
                       value={charData[character.id]?.weaponRank}
                       onValueChange={(value) =>
-                        updateCharData(character.name, "weaponRank", value)
+                        updateCharacterData(character.id, "weaponRank", value)
                       }
                       disabled={team[i]?.name === null}
                     >
@@ -227,7 +217,7 @@ function CharStatsForm(props: CharStatsProps) {
                     <Select
                       value={charData[character.id]?.echoSet}
                       onValueChange={(value) =>
-                        updateCharData(character.name, "echoSet", value)
+                        updateCharacterData(character.id, "echoSet", value)
                       }
                       disabled={team[i]?.name === null}
                     >

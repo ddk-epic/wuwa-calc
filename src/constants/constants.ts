@@ -8,11 +8,17 @@ import { Skill, Weapon, Character } from "./types";
 import { weapons } from "./weapon-data";
 
 export const weaponData: Record<string, Weapon[]> = {
-  greatsword: weapons.filter((weapon) => weapon.type === "Greatsword"),
-  sword: weapons.filter((weapon) => weapon.type === "Sword"),
-  pistol: weapons.filter((weapon) => weapon.type === "Pistol"),
-  gauntlet: weapons.filter((weapon) => weapon.type === "Gauntlet"),
-  rectifier: weapons.filter((weapon) => weapon.type === "Rectifier"),
+  greatsword: Object.values(weapons).filter(
+    (weapon) => weapon.type === "Greatsword"
+  ),
+  sword: Object.values(weapons).filter((weapon) => weapon.type === "Sword"),
+  pistol: Object.values(weapons).filter((weapon) => weapon.type === "Pistol"),
+  gauntlet: Object.values(weapons).filter(
+    (weapon) => weapon.type === "Gauntlet"
+  ),
+  rectifier: Object.values(weapons).filter(
+    (weapon) => weapon.type === "Rectifier"
+  ),
 };
 
 export const skillData: Record<string, Skill[]> = {

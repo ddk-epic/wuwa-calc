@@ -1,7 +1,7 @@
 import { Echo } from "./types";
 
-export const echoes: Echo[] = [
-  {
+export const echoes: Record<string, Echo> = {
+  "Nightmare: Crownless": {
     name: "Nightmare: Crownless",
     set: "Havoc Eclipse",
     damage: 2.646,
@@ -13,7 +13,7 @@ export const echoes: Echo[] = [
     charges: 3,
     hasBuff: true,
   },
-  {
+  "Impermanence Heron": {
     name: "Impermanence Heron",
     set: "Moonlit Clouds",
     damage: 3.1056,
@@ -25,7 +25,7 @@ export const echoes: Echo[] = [
     charges: 0,
     hasBuff: true,
   },
-  {
+  "Fallacy of No Return": {
     name: "Fallacy of No Return",
     set: "Rejuvenating Glow",
     damage: 0.1982,
@@ -37,4 +37,4 @@ export const echoes: Echo[] = [
     charges: 0,
     hasBuff: true,
   },
-];
+};

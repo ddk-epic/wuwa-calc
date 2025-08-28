@@ -106,40 +106,29 @@ export default function CalculatorContent() {
     });
   };
 
-  const updateCharData = (
+  const updateCharacterData = (
     character: string,
     key: keyof Character,
     value: string | number
   ) => {
-    const updatedCharacter = { ...charData[character], [key]: value };
-    setCharData({ ...charData, [character]: updatedCharacter });
-  };
+    let updatedValue: any = value;
 
-  const updateWeaponData = (
-    character: string,
-    key: keyof Character,
-    value: string
-  ) => {
-    const getWeapon =
-      key === "weapon"
-        ? weapons.find((weapon) => weapon.name === value)
-        : undefined;
-    const updatedCharacter = { ...charData[character], [key]: getWeapon };
-    setCharData({ ...charData, [character]: updatedCharacter });
-  };
+    if (key === "weapon") {
+      updatedValue = weapons[value];
+    } else if (key === "echo") {
+      updatedValue = echoes[value];
+    }
+    if (!updatedValue) return;
 
-  const updateEchoData = (
-    character: string,
-    key: keyof Character,
-    value: string
-  ) => {
-    const getEcho =
-      key === "echo" ? echoes.find((echo) => echo.name === value) : undefined;
     const updatedCharacter = {
       ...charData[character],
-      [key]: getEcho,
+      [key]: updatedValue,
     };
-    setCharData({ ...charData, [character]: updatedCharacter });
+
+    setCharData({
+      ...charData,
+      [character]: updatedCharacter,
+    });
   };
 
   const clear = () => {
@@ -175,9 +164,7 @@ export default function CalculatorContent() {
       <CharStats
         team={team}
         charData={charData}
-        updateCharData={updateCharData}
-        updateWeaponData={updateWeaponData}
-        updateEchoData={updateEchoData}
+        updateCharacterData={updateCharacterData}
       />
 
       {/* Timeline Container */}
