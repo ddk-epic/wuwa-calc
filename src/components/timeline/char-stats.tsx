@@ -17,7 +17,11 @@ import {
   SelectGroup,
   SelectItem,
 } from "@/components/ui/select";
-import { Character, CharacterConstants } from "@/constants/types";
+import {
+  Character,
+  CharacterConstants,
+  CharacterData,
+} from "@/constants/types";
 import { builds, weaponData } from "@/constants/constants";
 import { echoes } from "@/constants/echo-data";
 
@@ -49,7 +53,7 @@ function WeaponSelectGroup({ character }: { character: CharacterConstants }) {
   return (
     <SelectGroup>
       {character.weapon.toLowerCase() &&
-        weaponData[character.weapon.toLowerCase()].map((weapon) => (
+        weaponData[character.weaponType.toLowerCase()].map((weapon) => (
           <SelectItem key={weapon.name} value={weapon.name}>
             {weapon.name}
           </SelectItem>
@@ -96,7 +100,8 @@ function EchoSetSelectGroup() {
 
 interface CharStatsProps {
   team: (null | CharacterConstants)[];
-  charData: Record<string, Character>;
+  charSettings: Record<string, Character>;
+  charData: (CharacterData | null)[];
   updateCharacterData: (
     character: string,
     key: keyof Character,
@@ -105,8 +110,7 @@ interface CharStatsProps {
 }
 
 function CharStatsForm(props: CharStatsProps) {
-  const { team, charData, updateCharacterData } =
-    props;
+  const { team, charData, charSettings, updateCharacterData } = props;
   return (
     <div className="flex text-xs">
       {/* Character Data Form */}
@@ -128,7 +132,7 @@ function CharStatsForm(props: CharStatsProps) {
                   {/* Build */}
                   <div>
                     <Select
-                      value={charData[character.id]?.build}
+                      value={charData[i]?.build}
                       onValueChange={(value) =>
                         updateCharacterData(character.id, "build", value)
                       }
@@ -145,7 +149,7 @@ function CharStatsForm(props: CharStatsProps) {
                   {/* Sequence */}
                   <div>
                     <Select
-                      value={charData[character.id]?.sequence}
+                      value={charData[i]?.sequence}
                       onValueChange={(value) =>
                         updateCharacterData(character.id, "sequence", value)
                       }
@@ -162,7 +166,7 @@ function CharStatsForm(props: CharStatsProps) {
                   {/* Echo */}
                   <div>
                     <Select
-                      value={charData[character.id]?.echo?.name}
+                      value={charData[i]?.echo?.name}
                       onValueChange={(value) =>
                         updateCharacterData(character.id, "echo", value)
                       }
@@ -181,7 +185,7 @@ function CharStatsForm(props: CharStatsProps) {
                   {/* Weapon */}
                   <div>
                     <Select
-                      value={charData[character.id]?.weapon?.name}
+                      value={charData[i]?.weapon?.name}
                       onValueChange={(value) =>
                         updateCharacterData(character.id, "weapon", value)
                       }
@@ -198,7 +202,7 @@ function CharStatsForm(props: CharStatsProps) {
                   {/* Rank */}
                   <div>
                     <Select
-                      value={charData[character.id]?.weaponRank}
+                      value={charData[i]?.weaponRank}
                       onValueChange={(value) =>
                         updateCharacterData(character.id, "weaponRank", value)
                       }
@@ -215,7 +219,7 @@ function CharStatsForm(props: CharStatsProps) {
                   {/* Echo Set */}
                   <div>
                     <Select
-                      value={charData[character.id]?.echoSet}
+                      value={charData[i]?.echoSet}
                       onValueChange={(value) =>
                         updateCharacterData(character.id, "echoSet", value)
                       }
@@ -223,9 +227,7 @@ function CharStatsForm(props: CharStatsProps) {
                     >
                       <SelectTrigger className="min-w-52 text-xs rounded-none focus:ring-0 focus:outline-none focus:ring-transparent">
                         <SelectValue
-                          placeholder={
-                            charData[character.id]?.echoSet ?? "Echo Set"
-                          }
+                          placeholder={charData[i]?.echoSet ?? "Echo Set"}
                         />
                       </SelectTrigger>
                       <SelectContent>

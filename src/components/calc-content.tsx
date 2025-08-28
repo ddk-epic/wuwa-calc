@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -11,7 +11,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { charConstData, skillData, totalBuffMap } from "@/constants/constants";
+import { skillData, totalBuffMap } from "@/constants/constants";
 import TimelineBar from "./timeline/timeline-bar";
 import SelectSkill from "./timeline/skill-selection";
 import TimeMarkers from "./timeline/time-markers";
@@ -30,6 +30,7 @@ import CharStats from "./timeline/char-stats";
 import { charStatData } from "@/constants/char-data";
 import { weapons } from "@/constants/weapon-data";
 import { echoes } from "@/constants/echo-data";
+import { constructCharBase } from "@/lib/calculations";
 
 export default function CalculatorContent() {
   const [openPopovers, setOpenPopovers] = useState<Record<string, boolean>>({});
@@ -37,13 +38,23 @@ export default function CalculatorContent() {
     "team",
     [null, null, null]
   );
-  const [charData, setCharData] = usePersistedState<Record<string, Character>>(
-    "charData",
-    {}
-  );
+  const [charSettings, setCharSettings] = usePersistedState<
+    Record<string, Character>
+  >("charSettings", {});
   const [skillSequence, setSkillSequence] = usePersistedState<SequenceSkill[]>(
     "skills",
     []
+  );
+  const charData = useMemo(
+    () =>
+      team.map((character) => {
+        if (!character) return null;
+        return constructCharBase(
+          charStatData[character.id],
+          charSettings[character.id]
+        );
+      }),
+    [team, charSettings]
   );
 
   const currentSequenceTime = skillSequence.reduce(
@@ -100,10 +111,6 @@ export default function CalculatorContent() {
     const updatedTeam = [...team];
     updatedTeam[index] = charStatData[characterId];
     setTeam(updatedTeam);
-    setCharData({
-      ...charData,
-      [characterId]: charConstData[characterId],
-    });
   };
 
   const updateCharacterData = (
@@ -121,19 +128,19 @@ export default function CalculatorContent() {
     if (!updatedValue) return;
 
     const updatedCharacter = {
-      ...charData[character],
+      ...charSettings[character],
       [key]: updatedValue,
     };
 
-    setCharData({
-      ...charData,
+    setCharSettings({
+      ...charSettings,
       [character]: updatedCharacter,
     });
   };
 
   const clear = () => {
     setSkillSequence([]);
-    setCharData({});
+    setCharSettings({});
   };
 
   return (
@@ -163,6 +170,7 @@ export default function CalculatorContent() {
       {/* Stats Accordion */}
       <CharStats
         team={team}
+        charSettings={charSettings}
         charData={charData}
         updateCharacterData={updateCharacterData}
       />

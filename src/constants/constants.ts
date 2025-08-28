@@ -1,10 +1,9 @@
-import { camellya, sanhua, shorekeeper } from "./char-data";
 import {
   camellya_skills,
   sanhua_skills,
   shorekeeper_skills,
 } from "./skill-data";
-import { Skill, Weapon, Character } from "./types";
+import { Skill, Weapon } from "./types";
 import { weapons } from "./weapon-data";
 
 export const weaponData: Record<string, Weapon[]> = {
@@ -25,12 +24,6 @@ export const skillData: Record<string, Skill[]> = {
   camellya: camellya_skills,
   sanhua: sanhua_skills,
   shorekeeper: shorekeeper_skills,
-};
-
-export const charConstData: Record<string, Character> = {
-  camellya: camellya,
-  sanhua: sanhua,
-  shorekeeper: shorekeeper,
 };
 
 export const builds = [

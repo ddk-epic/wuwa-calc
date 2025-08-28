@@ -52,7 +52,9 @@ export interface Echo {
 export interface CharacterConstants {
   id: string;
   name: string;
+  weaponType: string;
   weapon: string;
+  echo: string;
   baseHp: number;
   baseAtk: number;
   baseDef: number;
@@ -80,4 +82,33 @@ export interface Character {
   health: number;
   crit: number;
   critDmg: number;
+}
+
+export interface BonusStats {
+  "Flat Attack": number;
+  "Flat Health": number;
+  "Flat Defense": number;
+  Attack: number;
+  Health: number;
+  Defense: number;
+  "Energy Regen": number;
+  Crit: number;
+  "Crit Dmg": number;
+  Basic: number;
+  Heavy: number;
+  Skill: number;
+  Liberation: number;
+  Aero: number;
+  Electro: number;
+  Fusion: number;
+  Glacio: number;
+  Havoc: number;
+  Spectro: number;
+}
+
+export type DCondKeys = "Concerto" | "Resonance" | "Forte" | "Forte 2";
+
+export interface CharacterData extends Character {
+  bonusStats: [keyof BonusStats, number][];
+  dCond: Map<DCondKeys, number>;
 }
