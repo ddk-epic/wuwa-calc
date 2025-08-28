@@ -9,15 +9,15 @@ import {
   SelectGroup,
   SelectItem,
 } from "@/components/ui/select";
-import { characters } from "@/constants/constants";
 import { CharacterConstants } from "@/constants/types";
+import { charStatData } from "@/constants/char-data";
 
 function CharacterSelectGroup() {
   return (
     <SelectGroup>
-      {characters.map((name) => (
-        <SelectItem key={name} value={name}>
-          {name}
+      {Object.entries(charStatData).map(([character, charData]) => (
+        <SelectItem key={character} value={charData.id}>
+          {charData.name}
         </SelectItem>
       ))}
     </SelectGroup>
@@ -36,7 +36,7 @@ export default function SelectCharacter(props: SelectCharacterProps) {
   return (
     <div className="flex">
       <Select
-        value={team[0]?.name}
+        value={team[0]?.id}
         onValueChange={(value) => updateTeam(0, value)}
       >
         <SelectTrigger className="bg-gray-200 text-black border-gray-700 border-1 rounded-none focus:ring-0 focus:outline-none focus:ring-transparent">
@@ -47,7 +47,7 @@ export default function SelectCharacter(props: SelectCharacterProps) {
         </SelectContent>
       </Select>
       <Select
-        value={team[1]?.name}
+        value={team[1]?.id}
         onValueChange={(value) => updateTeam(1, value)}
       >
         <SelectTrigger className="rounded-none focus:ring-0 focus:outline-none focus:ring-transparent">
@@ -58,7 +58,7 @@ export default function SelectCharacter(props: SelectCharacterProps) {
         </SelectContent>
       </Select>
       <Select
-        value={team[2]?.name}
+        value={team[2]?.id}
         onValueChange={(value) => updateTeam(2, value)}
       >
         <SelectTrigger className="rounded-none focus:ring-0 focus:outline-none focus:ring-transparent">

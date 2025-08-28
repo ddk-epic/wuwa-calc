@@ -50,6 +50,7 @@ export interface Echo {
 }
 
 export interface CharacterConstants {
+  id: string;
   name: string;
   weapon: string;
   baseHp: number;

@@ -3,7 +3,22 @@ import { weapons } from "./weapon-data";
 import { Character, CharacterConstants } from "./types";
 
 export const charStatData: Record<string, CharacterConstants> = {
+  camellya: {
+    id: "camellya",
+    name: "Camellya",
+    weapon: "Sword",
+    baseHp: 826,
+    baseAtk: 36,
+    baseDef: 95,
+    MinorForte1: "Attack",
+    MinorForte2: "Crit Dmg",
+    image: "https://i.imgur.com/CpnmtcA.png",
+    element: "Havoc",
+    maxForte: 100,
+    maxForte2: 0,
+  },
   encore: {
+    id: "encore",
     name: "Encore",
     weapon: "Rectifier",
     baseHp: 841,
@@ -17,6 +32,8 @@ export const charStatData: Record<string, CharacterConstants> = {
     maxForte2: 0,
   },
   sanhua: {
+    
+    id: "sanhua",
     name: "Sanhua",
     weapon: "Sword",
     baseHp: 805,
@@ -30,6 +47,7 @@ export const charStatData: Record<string, CharacterConstants> = {
     maxForte2: 0,
   },
   shorekeeper: {
+    id: "shorekeeper",
     name: "Shorekeeper",
     weapon: "Rectifier",
     baseHp: 1337,
@@ -40,19 +58,6 @@ export const charStatData: Record<string, CharacterConstants> = {
     image: "https://i.imgur.com/iaR9PpA.png",
     element: "Spectro",
     maxForte: 5,
-    maxForte2: 0,
-  },
-  camellya: {
-    name: "Camellya",
-    weapon: "Sword",
-    baseHp: 826,
-    baseAtk: 36,
-    baseDef: 95,
-    MinorForte1: "Attack",
-    MinorForte2: "Crit Dmg",
-    image: "https://i.imgur.com/CpnmtcA.png",
-    element: "Havoc",
-    maxForte: 100,
     maxForte2: 0,
   },
 };

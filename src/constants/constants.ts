@@ -7,13 +7,6 @@ import {
 import { Skill, Weapon, Character } from "./types";
 import { weapons } from "./weapon-data";
 
-export const characters: string[] = [
-  "Encore",
-  "Camellya",
-  "Sanhua",
-  "Shorekeeper",
-];
-
 export const weaponData: Record<string, Weapon[]> = {
   greatsword: weapons.filter((weapon) => weapon.type === "Greatsword"),
   sword: weapons.filter((weapon) => weapon.type === "Sword"),
