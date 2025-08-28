@@ -296,45 +296,51 @@ export default function CalculatorContent() {
       </Card>
 
       <div className="grid grid-cols-[2fr_5fr] gap-6">
-        {skillSequence.length > 0 && (
+        {
           <>
             {/* Left Tab */}
-            <TimelineTable skillSequence={skillSequence} />
+            <Card className="min-h-86">
+              {skillSequence.length > 0 && (
+                <TimelineTable skillSequence={skillSequence} />
+              )}
+            </Card>
 
             {/* Right Tab */}
             <Card>
-              <CardContent className="px-3">
-                <Tabs defaultValue="summary">
-                  <TabsList>
-                    <TabsTrigger
-                      value="summary"
-                      className="text-md font-semibold mb-4"
-                    >
-                      Summary
-                    </TabsTrigger>
-                    <TabsTrigger
-                      value="details"
-                      className="text-md font-semibold mb-4"
-                    >
-                      Details
-                    </TabsTrigger>
-                  </TabsList>
-                  <TabsContent value="summary" className="px-1">
-                    {/* Sequence Summary */}
-                    <RotationSummary
-                      team={team}
-                      skillSequence={skillSequence}
-                    />
-                  </TabsContent>
-                  {/* Sequence Details */}
-                  <TabsContent value="details" className="px-1">
-                    <MatrixTable data={totalBuffMap} />
-                  </TabsContent>
-                </Tabs>
-              </CardContent>
+              {skillSequence.length > 0 && (
+                <CardContent className="px-3">
+                  <Tabs defaultValue="summary">
+                    <TabsList>
+                      <TabsTrigger
+                        value="summary"
+                        className="text-md font-semibold mb-4"
+                      >
+                        Summary
+                      </TabsTrigger>
+                      <TabsTrigger
+                        value="details"
+                        className="text-md font-semibold mb-4"
+                      >
+                        Details
+                      </TabsTrigger>
+                    </TabsList>
+                    <TabsContent value="summary" className="px-1">
+                      {/* Sequence Summary */}
+                      <RotationSummary
+                        team={team}
+                        skillSequence={skillSequence}
+                      />
+                    </TabsContent>
+                    {/* Sequence Details */}
+                    <TabsContent value="details" className="px-1">
+                      <MatrixTable data={totalBuffMap} />
+                    </TabsContent>
+                  </Tabs>
+                </CardContent>
+              )}
             </Card>
           </>
-        )}
+        }
       </div>
     </div>
   );
